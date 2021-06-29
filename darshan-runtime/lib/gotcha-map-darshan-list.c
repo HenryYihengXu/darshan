@@ -1,11 +1,8 @@
 #ifdef DARSHAN_GOTCHA
 #include "gotcha-map-darshan-list.h"
 
-#include "gotcha/gotcha_types.h"
-#include "gotcha/gotcha.h"
-
 struct gotcha_binding_t darshan_wrappers[] = {
-    /* posix I/O */
+    /* posix */
     { "open", DARSHAN_DECL(open), &DARSHAN_WRAPPEE_HANDLE(open) },
     { "open64", DARSHAN_DECL(open64), &DARSHAN_WRAPPEE_HANDLE(open64) },
     { "__open_2", DARSHAN_DECL(__open_2), &DARSHAN_WRAPPEE_HANDLE(__open_2) },
@@ -70,7 +67,7 @@ struct gotcha_binding_t darshan_wrappers[] = {
     { "lio_listio64", DARSHAN_DECL(lio_listio64), &DARSHAN_WRAPPEE_HANDLE(lio_listio64) },
     { "rename", DARSHAN_DECL(rename), &DARSHAN_WRAPPEE_HANDLE(rename) },
     
-    /* stdio Function Calls */
+    /* stdio */
     { "fopen", DARSHAN_DECL(fopen), &DARSHAN_WRAPPEE_HANDLE(fopen) },
     { "fopen64", DARSHAN_DECL(fopen64), &DARSHAN_WRAPPEE_HANDLE(fopen64) },
     { "fdopen", DARSHAN_DECL(fdopen), &DARSHAN_WRAPPEE_HANDLE(fdopen) },
@@ -104,7 +101,7 @@ struct gotcha_binding_t darshan_wrappers[] = {
     { "fsetpos64", DARSHAN_DECL(fsetpos64), &DARSHAN_WRAPPEE_HANDLE(fsetpos64) },
     { "rewind", DARSHAN_DECL(rewind), &DARSHAN_WRAPPEE_HANDLE(rewind) },
     
-    /* mpiio Function Calls */
+    /* mpiio */
     { "MPI_File_close", DARSHAN_DECL(MPI_File_close), &DARSHAN_WRAPPEE_HANDLE(MPI_File_close) },
     { "MPI_File_iread_at", DARSHAN_DECL(MPI_File_iread_at), &DARSHAN_WRAPPEE_HANDLE(MPI_File_iread_at) },
     { "MPI_File_iread", DARSHAN_DECL(MPI_File_iread), &DARSHAN_WRAPPEE_HANDLE(MPI_File_iread) },
@@ -134,12 +131,12 @@ struct gotcha_binding_t darshan_wrappers[] = {
     { "MPI_File_write_ordered", DARSHAN_DECL(MPI_File_write_ordered), &DARSHAN_WRAPPEE_HANDLE(MPI_File_write_ordered) },
     { "MPI_File_write_shared", DARSHAN_DECL(MPI_File_write_shared), &DARSHAN_WRAPPEE_HANDLE(MPI_File_write_shared) },
     
-    /* core-init-finalize Function Calls */
-    { "MPI_Init", DARSHAN_POSIX_DECL(MPI_Init), &DARSHAN_WRAPPEE_HANDLE(MPI_Init) },
-    { "MPI_Init_thread", DARSHAN_POSIX_DECL(MPI_Init_thread), &DARSHAN_WRAPPEE_HANDLE(MPI_Init_thread) },
-    { "MPI_Finalize", DARSHAN_POSIX_DECL(MPI_Finalize), &DARSHAN_WRAPPEE_HANDLE(MPI_Finalize) },
+    /* core-init-finalize */
+    { "MPI_Init", DARSHAN_DECL(MPI_Init), &DARSHAN_WRAPPEE_HANDLE(MPI_Init) },
+    { "MPI_Init_thread", DARSHAN_DECL(MPI_Init_thread), &DARSHAN_WRAPPEE_HANDLE(MPI_Init_thread) },
+    { "MPI_Finalize", DARSHAN_DECL(MPI_Finalize), &DARSHAN_WRAPPEE_HANDLE(MPI_Finalize) },
 
-    /* hdf5 Function Calls */
+    /* hdf5 */
     { "H5Fcreate", DARSHAN_DECL(H5Fcreate), &DARSHAN_WRAPPEE_HANDLE(H5Fcreate) },
     { "H5Fopen", DARSHAN_DECL(H5Fopen), &DARSHAN_WRAPPEE_HANDLE(H5Fopen) },
     { "H5Fflush", DARSHAN_DECL(H5Fflush), &DARSHAN_WRAPPEE_HANDLE(H5Fflush) },
@@ -155,18 +152,18 @@ struct gotcha_binding_t darshan_wrappers[] = {
 #endif
     { "H5Dclose", DARSHAN_DECL(H5Dclose), &DARSHAN_WRAPPEE_HANDLE(H5Dclose) },
     
-    /* mdhim Function Calls */
-    { "mdhimPut", DARSHAN_POSIX_DECL(mdhimPut), &DARSHAN_WRAPPEE_HANDLE(mdhimPut) },
-    { "mdhimGet", DARSHAN_POSIX_DECL(mdhimGet), &DARSHAN_WRAPPEE_HANDLE(mdhimGet) },
-    { "mdhimInit", DARSHAN_POSIX_DECL(mdhimInit), &DARSHAN_WRAPPEE_HANDLE(mdhimInit) },
+    /* mdhim */
+    { "mdhimPut", DARSHAN_DECL(mdhimPut), &DARSHAN_WRAPPEE_HANDLE(mdhimPut) },
+    { "mdhimGet", DARSHAN_DECL(mdhimGet), &DARSHAN_WRAPPEE_HANDLE(mdhimGet) },
+    { "mdhimInit", DARSHAN_DECL(mdhimInit), &DARSHAN_WRAPPEE_HANDLE(mdhimInit) },
 
-    /* null Function Calls */
-    { "foo", DARSHAN_POSIX_DECL(foo), &DARSHAN_WRAPPEE_HANDLE(foo) },
+    /* null */
+    { "foo", DARSHAN_DECL(foo), &DARSHAN_WRAPPEE_HANDLE(foo) },
     
-    /* pnetcdf Function Calls */
-    { "ncmpi_create", DARSHAN_POSIX_DECL(ncmpi_create), &DARSHAN_WRAPPEE_HANDLE(ncmpi_create) },
-    { "ncmpi_open", DARSHAN_POSIX_DECL(ncmpi_open), &DARSHAN_WRAPPEE_HANDLE(ncmpi_open) },
-    { "ncmpi_close", DARSHAN_POSIX_DECL(ncmpi_close), &DARSHAN_WRAPPEE_HANDLE(ncmpi_close) },
+    /* pnetcdf */
+    { "ncmpi_create", DARSHAN_DECL(ncmpi_create), &DARSHAN_WRAPPEE_HANDLE(ncmpi_create) },
+    { "ncmpi_open", DARSHAN_DECL(ncmpi_open), &DARSHAN_WRAPPEE_HANDLE(ncmpi_open) },
+    { "ncmpi_close", DARSHAN_DECL(ncmpi_close), &DARSHAN_WRAPPEE_HANDLE(ncmpi_close) },
     
 };
 
