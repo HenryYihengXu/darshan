@@ -22,6 +22,11 @@
 #include <pthread.h>
 #include <limits.h>
 
+#include "utlist.h"
+#include "darshan.h"
+#include "darshan-dynamic.h"
+#include "darshan-dxt.h"
+
 #ifndef HAVE_OFF64_T
 typedef int64_t off64_t;
 #endif

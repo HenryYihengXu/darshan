@@ -17,6 +17,10 @@
 #include <assert.h>
 #include <pthread.h>
 
+#include "darshan.h"
+#include "darshan-dynamic.h"
+#include "darshan-dxt.h"
+
 #define DARSHAN_DECL(func) __wrap_##func
 
 int DARSHAN_DECL(PMPI_File_close)(MPI_File *fh);
