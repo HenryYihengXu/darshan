@@ -1,5 +1,6 @@
 #ifdef DARSHAN_GOTCHA
 #include "gotcha-map-darshan-list.h"
+#include "darshan-posix.h"
 
 struct gotcha_binding_t darshan_wrappers[] = {
     /* posix */
