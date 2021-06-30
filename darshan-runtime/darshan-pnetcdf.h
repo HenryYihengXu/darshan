@@ -18,7 +18,9 @@
 #include <pthread.h>
 #include <mpi.h>
 
-#define DARSHAN_DECL(func) __wrap_##func
+#ifndef DARSHAN_DECL
+#define DARSHAN_DECL(func) __gotcha_wrap_##func
+#endif
 
 int DARSHAN_DECL(ncmpi_create)(MPI_Comm comm, const char *path, int cmode, MPI_Info info, int *ncidp);
 int DARSHAN_DECL(ncmpi_open)(MPI_Comm comm, const char *path, int omode, MPI_Info info, int *ncidp);

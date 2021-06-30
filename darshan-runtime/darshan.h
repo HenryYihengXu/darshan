@@ -55,6 +55,28 @@
        } \
     }
 
+#elif DARSHAN_GOTCHA
+
+#include <gotcha/gotcha.h>
+
+#define DARSHAN_FORWARD_DECL(__func,__ret,__args) \
+  __ret (*__real_ ## __func)__args = NULL
+
+#define DARSHAN_DECL(__func) __gotcha_wrap_ ## __func
+
+#define DARSHAN_WRAPPER_MAP(__func,__ret,__args,__fcall) \
+    __ret __gotcha__wrap_ ## __func __args __attribute__ ((alias ("__gotcha__wrap_" #__fcall)));
+
+#define MAP_OR_FAIL(__func) \
+    if (!(__real_ ## __func)) \
+    { \
+        __real_ ## __func = gotcha_get_wrappee(wrappee_handle_ ## func); \
+        if(!(__real_ ## __func)) { \
+            darshan_core_fprintf(stderr, "Darshan failed to map symbol: %s\n", #__func); \
+            exit(1); \
+       } \
+    }
+
 #else
 
 #define DARSHAN_FORWARD_DECL(__name,__ret,__args) \

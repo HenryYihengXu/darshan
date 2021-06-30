@@ -19,7 +19,9 @@
 
 #include <mpi.h>
 
-#define DARSHAN_DECL(func) __wrap_##func
+#ifndef DARSHAN_DECL
+#define DARSHAN_DECL(func) __gotcha_wrap_##func
+#endif
 
 int DARSHAN_DECL(PMPI_File_close)(MPI_File *fh);
 int DARSHAN_DECL(PMPI_File_iread_at)(MPI_File fh, MPI_Offset offset, void *buf, int count, MPI_Datatype datatype, __D_MPI_REQUEST *request);

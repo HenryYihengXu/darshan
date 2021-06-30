@@ -16,7 +16,9 @@
 
 #define RECORD_STRING "total-mdhim-obj-stats"
 
-#define DARSHAN_DECL(func) __wrap_##func
+#ifndef DARSHAN_DECL
+#define DARSHAN_DECL(func) __gotcha_wrap_##func
+#endif
 
 mdhim_rm_t * DARSHAN_DECL(mdhimPut)(mdhim_t *md,
             index_t *index, void *primary_key, size_t primary_key_len,

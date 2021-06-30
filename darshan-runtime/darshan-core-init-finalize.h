@@ -11,7 +11,9 @@
 #include <mpi.h>
 #endif
 
-#define DARSHAN_DECL(func) __wrap_##func
+#ifndef DARSHAN_DECL
+#define DARSHAN_DECL(func) __gotcha_wrap_##func
+#endif
 
 #ifdef HAVE_MPI
 int DARSHAN_DECL(MPI_Finalize)();

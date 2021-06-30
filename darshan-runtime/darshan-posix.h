@@ -29,7 +29,9 @@ typedef int64_t off64_t;
 #define aiocb64 aiocb
 #endif
 
-#define DARSHAN_DECL(func) __wrap_##func
+#ifndef DARSHAN_DECL
+#define DARSHAN_DECL(func) __gotcha_wrap_##func
+#endif
 
 int DARSHAN_DECL(open)(const char *path, int flags, ...);
 int DARSHAN_DECL(open64)(const char *path, int flags, ...);

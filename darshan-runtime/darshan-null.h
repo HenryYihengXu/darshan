@@ -11,7 +11,9 @@
 #include <string.h>
 #include <assert.h>
 
-#define DARSHAN_DECL(func) __wrap_##func
+#ifndef DARSHAN_DECL
+#define DARSHAN_DECL(func) __gotcha_wrap_##func
+#endif
 
 int DARSHAN_DECL(foo)(const char *name, int arg1);
 
