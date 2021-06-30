@@ -17,9 +17,7 @@
 #include <assert.h>
 #include <pthread.h>
 
-#include "darshan.h"
-#include "darshan-dynamic.h"
-#include "darshan-dxt.h"
+#include <mpi.h>
 
 #define DARSHAN_DECL(func) __wrap_##func
 
