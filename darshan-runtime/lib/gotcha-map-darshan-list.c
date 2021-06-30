@@ -2,6 +2,7 @@
 #include "darshan.h"
 #include "gotcha-map-darshan-list.h"
 #include "darshan-posix.h"
+#include "darshan-stdio.h"
 #include "darshan-mpiio.h"
 #include "darshan-core-init-finalize.h"
 #include "darshan-hdf5.h"
