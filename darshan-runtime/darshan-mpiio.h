@@ -20,7 +20,7 @@
 #include <mpi.h>
 
 #ifndef DARSHAN_DECL
-#define DARSHAN_DECL(func) __gotcha_wrap_##func
+#define DARSHAN_DECL(func) __darshan_gotcha_wrap_##func
 #endif
 
 int DARSHAN_DECL(MPI_File_close)(MPI_File *fh);

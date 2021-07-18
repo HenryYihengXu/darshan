@@ -19,7 +19,7 @@
 #include <mpi.h>
 
 #ifndef DARSHAN_DECL
-#define DARSHAN_DECL(func) __gotcha_wrap_##func
+#define DARSHAN_DECL(func) __darshan_gotcha_wrap_##func
 #endif
 
 int DARSHAN_DECL(ncmpi_create)(MPI_Comm comm, const char *path, int cmode, MPI_Info info, int *ncidp);

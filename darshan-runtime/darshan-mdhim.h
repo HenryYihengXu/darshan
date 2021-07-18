@@ -17,7 +17,7 @@
 #define RECORD_STRING "total-mdhim-obj-stats"
 
 #ifndef DARSHAN_DECL
-#define DARSHAN_DECL(func) __gotcha_wrap_##func
+#define DARSHAN_DECL(func) __darshan_gotcha_wrap_##func
 #endif
 
 mdhim_rm_t * DARSHAN_DECL(mdhimPut)(mdhim_t *md,
