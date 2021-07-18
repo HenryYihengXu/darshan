@@ -19,6 +19,7 @@
 #include "darshan-core.h"
 #include "darshan-dynamic.h"
 
+#ifndef DARSHAN_GOTCHA
 #ifdef HAVE_MPI
 DARSHAN_FORWARD_DECL(PMPI_Finalize, int, ());
 DARSHAN_FORWARD_DECL(PMPI_Init, int, (int *argc, char ***argv));
@@ -113,6 +114,97 @@ __attribute__((destructor)) void serial_finalize(void)
 }
 #endif
 
+#else /* DARSHAN_GOTCHA */
+
+#ifdef HAVE_MPI
+DARSHAN_FORWARD_DECL(MPI_Finalize, int, ());
+DARSHAN_FORWARD_DECL(MPI_Init, int, (int *argc, char ***argv));
+DARSHAN_FORWARD_DECL(MPI_Init_thread, int, (int *argc, char ***argv, int required, int *provided));
+
+int DARSHAN_DECL(MPI_Init)(int *argc, char ***argv)
+{
+    int ret;
+
+    MAP_OR_FAIL(MPI_Init);
+
+    ret = __real_MPI_Init(argc, argv);
+    if(ret != MPI_SUCCESS)
+    {
+        return(ret);
+    }
+
+    if(argc && argv)
+    {
+        darshan_core_initialize(*argc, *argv);
+    }
+    else
+    {
+        /* we don't see argc and argv here in fortran */
+        darshan_core_initialize(0, NULL);
+    }
+
+    return(ret);
+}
+
+int DARSHAN_DECL(MPI_Init_thread)(int *argc, char ***argv, int required, int *provided)
+{
+    int ret;
+
+    MAP_OR_FAIL(MPI_Init_thread);
+
+    ret = __real_MPI_Init_thread(argc, argv, required, provided);
+    if(ret != MPI_SUCCESS)
+    {
+        return(ret);
+    }
+
+    if(argc && argv)
+    {
+        darshan_core_initialize(*argc, *argv);
+    }
+    else
+    {
+        /* we don't see argc and argv here in fortran */
+        darshan_core_initialize(0, NULL);
+    }
+
+    return(ret);
+}
+
+int DARSHAN_DECL(MPI_Finalize)(void)
+{
+    int ret;
+
+    MAP_OR_FAIL(MPI_Finalize);
+
+    darshan_core_shutdown(1);
+
+    ret = __real_MPI_Finalize();
+    return(ret);
+}
+#endif
+
+#ifdef __GNUC__
+__attribute__((constructor)) void serial_init(void)
+{
+    char *no_mpi;
+    no_mpi = getenv(DARSHAN_ENABLE_NONMPI);
+    if (no_mpi)
+        darshan_core_initialize(0, NULL);
+    return;
+}
+
+__attribute__((destructor)) void serial_finalize(void)
+{
+    char *no_mpi;
+    no_mpi = getenv(DARSHAN_ENABLE_NONMPI);
+    if (no_mpi)
+        darshan_core_shutdown(1);
+    return;
+}
+#endif
+
+#endif /* DARSHAN_GOTCHA */
 /*
  * Local variables:
  *  c-indent-level: 4
