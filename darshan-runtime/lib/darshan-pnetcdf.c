@@ -25,7 +25,7 @@
 #include "darshan-dynamic.h"
 
 #ifdef DARSHAN_GOTCHA
-#include gotcha-map-darshan-list.h
+#include "gotcha-map-darshan-list.h"
 #endif
 
 DARSHAN_FORWARD_DECL(ncmpi_create, int, (MPI_Comm comm, const char *path, int cmode, MPI_Info info, int *ncidp));

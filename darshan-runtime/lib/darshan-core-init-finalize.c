@@ -20,7 +20,7 @@
 #include "darshan-dynamic.h"
 
 #ifdef DARSHAN_GOTCHA
-#include gotcha-map-darshan-list.h
+#include "gotcha-map-darshan-list.h"
 #endif
 
 #ifndef DARSHAN_GOTCHA

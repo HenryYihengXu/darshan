@@ -22,7 +22,7 @@
 #include "darshan-dynamic.h"
 
 #ifdef DARSHAN_GOTCHA
-#include gotcha-map-darshan-list.h
+#include "gotcha-map-darshan-list.h"
 #endif
 
 #define RECORD_STRING "total-mdhim-obj-stats"

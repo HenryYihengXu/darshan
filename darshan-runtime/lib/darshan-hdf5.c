@@ -27,7 +27,7 @@
 #include <hdf5.h>
 
 #ifdef DARSHAN_GOTCHA
-#include gotcha-map-darshan-list.h
+#include "gotcha-map-darshan-list.h"
 #endif
 
 /* H5F prototypes */

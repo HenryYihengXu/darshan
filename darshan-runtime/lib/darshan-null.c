@@ -19,7 +19,7 @@
 #include "darshan-dynamic.h"
 
 #ifdef DARSHAN_GOTCHA
-#include gotcha-map-darshan-list.h
+#include "gotcha-map-darshan-list.h"
 #endif
 
 /* The "NULL" module is an example instrumentation module implementation provided

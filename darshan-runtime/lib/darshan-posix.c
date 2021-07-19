@@ -33,7 +33,7 @@
 #include "darshan-dxt.h"
 
 #ifdef DARSHAN_GOTCHA
-#include gotcha-map-darshan-list.h
+#include "gotcha-map-darshan-list.h"
 #endif
 
 #ifndef HAVE_OFF64_T
