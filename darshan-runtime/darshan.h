@@ -74,7 +74,7 @@
 #define MAP_OR_FAIL(__func) \
     if (!(__darshan_real_ ## __func)) \
     { \
-        __darshan_real_ ## __func = gotcha_get_wrappee(wrappee_handle_ ## func); \
+        __darshan_real_ ## __func = gotcha_get_wrappee(darshan_wrappee_handle_ ## func); \
         if(!(__darshan_real_ ## __func)) { \
             darshan_core_fprintf(stderr, "Darshan failed to map symbol: %s\n", #__func); \
             exit(1); \
