@@ -147,7 +147,7 @@ int DARSHAN_DECL(MPI_Init)(int *argc, char ***argv)
         darshan_core_initialize(0, NULL);
     }
     int priority = 3;
-    setup_darshan_gotcha_wrapper(priority);
+    setup_darshan_gotcha_wrappers(priority);
 
     return(ret);
 }
