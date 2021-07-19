@@ -112,7 +112,7 @@ DARSHAN_FORWARD_DECL(PMPI_File_write_shared, int, (MPI_File fh, const void *buf,
 DARSHAN_FORWARD_DECL(PMPI_File_write_shared, int, (MPI_File fh, void *buf, int count, MPI_Datatype datatype, MPI_Status *status));
 #endif
 
-else /* DARSHAN_GOTCHA */
+#else /* DARSHAN_GOTCHA */
 
 DARSHAN_FORWARD_DECL(MPI_File_close, int, (MPI_File *fh));
 DARSHAN_FORWARD_DECL(MPI_File_iread_at, int, (MPI_File fh, MPI_Offset offset, void *buf, int count, MPI_Datatype datatype, __D_MPI_REQUEST *request));
