@@ -31,7 +31,7 @@ int DARSHAN_DECL(MPI_Init)(int *argc, char ***argv)
 
     MAP_OR_FAIL(PMPI_Init);
 
-    ret = __real_PMPI_Init(argc, argv);
+    ret = DARSHAN_REAL_CALL(PMPI_Init)(argc, argv);
     if(ret != MPI_SUCCESS)
     {
         return(ret);
@@ -57,7 +57,7 @@ int DARSHAN_DECL(MPI_Init_thread)(int *argc, char ***argv, int required, int *pr
 
     MAP_OR_FAIL(PMPI_Init_thread);
 
-    ret = __real_PMPI_Init_thread(argc, argv, required, provided);
+    ret = DARSHAN_REAL_CALL(PMPI_Init_thread)(argc, argv, required, provided);
     if(ret != MPI_SUCCESS)
     {
         return(ret);
@@ -85,11 +85,11 @@ int DARSHAN_DECL(MPI_Finalize)(void)
 
     darshan_core_shutdown(1);
 
-    ret = __real_PMPI_Finalize();
+    ret = DARSHAN_REAL_CALL(PMPI_Finalize)();
     return(ret);
 }
 DARSHAN_WRAPPER_MAP(PMPI_Finalize, int, (void), MPI_Finalize)
-#endif
+#endif /* HAVE_MPI */
 
 /*
  * Initialization hook that does not rely on MPI
@@ -112,7 +112,7 @@ __attribute__((destructor)) void serial_finalize(void)
         darshan_core_shutdown(1);
     return;
 }
-#endif
+#endif /* __GNUC__ */
 
 #else /* DARSHAN_GOTCHA */
 
@@ -127,7 +127,7 @@ int DARSHAN_DECL(MPI_Init)(int *argc, char ***argv)
 
     MAP_OR_FAIL(MPI_Init);
 
-    ret = __real_MPI_Init(argc, argv);
+    ret = DARSHAN_REAL_CALL(MPI_Init)(argc, argv);
     if(ret != MPI_SUCCESS)
     {
         return(ret);
@@ -152,7 +152,7 @@ int DARSHAN_DECL(MPI_Init_thread)(int *argc, char ***argv, int required, int *pr
 
     MAP_OR_FAIL(MPI_Init_thread);
 
-    ret = __real_MPI_Init_thread(argc, argv, required, provided);
+    ret = DARSHAN_REAL_CALL(MPI_Init_thread)(argc, argv, required, provided);
     if(ret != MPI_SUCCESS)
     {
         return(ret);
@@ -179,10 +179,10 @@ int DARSHAN_DECL(MPI_Finalize)(void)
 
     darshan_core_shutdown(1);
 
-    ret = __real_MPI_Finalize();
+    ret = DARSHAN_REAL_CALL(MPI_Finalize)();
     return(ret);
 }
-#endif
+#endif /* HAVE_MPI */
 
 #ifdef __GNUC__
 __attribute__((constructor)) void serial_init(void)
@@ -202,7 +202,7 @@ __attribute__((destructor)) void serial_finalize(void)
         darshan_core_shutdown(1);
     return;
 }
-#endif
+#endif /* __GNUC__ */
 
 #endif /* DARSHAN_GOTCHA */
 /*

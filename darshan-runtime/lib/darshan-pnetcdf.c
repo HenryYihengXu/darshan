@@ -122,7 +122,7 @@ int DARSHAN_DECL(ncmpi_create)(MPI_Comm comm, const char *path,
     MAP_OR_FAIL(ncmpi_create);
 
     tm1 = darshan_core_wtime();
-    ret = __real_ncmpi_create(comm, path, cmode, info, ncidp);
+    ret = DARSHAN_REAL_CALL(ncmpi_create)(comm, path, cmode, info, ncidp);
     tm2 = darshan_core_wtime();
     if(ret == 0)
     {
@@ -154,7 +154,7 @@ int DARSHAN_DECL(ncmpi_open)(MPI_Comm comm, const char *path,
     MAP_OR_FAIL(ncmpi_open);
 
     tm1 = darshan_core_wtime();
-    ret = __real_ncmpi_open(comm, path, omode, info, ncidp);
+    ret = DARSHAN_REAL_CALL(ncmpi_open)(comm, path, omode, info, ncidp);
     tm2 = darshan_core_wtime();
     if(ret == 0)
     {
@@ -185,7 +185,7 @@ int DARSHAN_DECL(ncmpi_close)(int ncid)
     MAP_OR_FAIL(ncmpi_close);
 
     tm1 = darshan_core_wtime();
-    ret = __real_ncmpi_close(ncid);
+    ret = DARSHAN_REAL_CALL(ncmpi_close)(ncid);
     tm2 = darshan_core_wtime();
 
     PNETCDF_PRE_RECORD();

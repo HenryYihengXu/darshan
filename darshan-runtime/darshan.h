@@ -26,6 +26,8 @@
 #include <dlfcn.h>
 #include <stdlib.h>
 
+#define DARSHAN_REAL_CALL(__func) __real_ ## __func
+
 #define DARSHAN_FORWARD_DECL(__func,__ret,__args) \
   __ret (*__real_ ## __func)__args = NULL
 
@@ -59,6 +61,8 @@
 
 #include <gotcha/gotcha.h>
 
+#define DARSHAN_REAL_CALL(__func) __darshan_real_ ## __func
+
 #define DARSHAN_FORWARD_DECL(__func,__ret,__args) \
   __ret (*__darshan_real_ ## __func)__args = NULL
 
@@ -78,6 +82,8 @@
     }
 
 #else
+
+#define DARSHAN_REAL_CALL(__func) __real_ ## __func
 
 #define DARSHAN_FORWARD_DECL(__name,__ret,__args) \
   extern __ret __real_ ## __name __args;

@@ -432,13 +432,13 @@ int DARSHAN_DECL(open)(const char *path, int flags, ...)
         va_end(arg);
 
         tm1 = darshan_core_wtime();
-        ret = __real_open(path, flags, mode);
+        ret = DARSHAN_REAL_CALL(open)(path, flags, mode);
         tm2 = darshan_core_wtime();
     }
     else
     {
         tm1 = darshan_core_wtime();
-        ret = __real_open(path, flags);
+        ret = DARSHAN_REAL_CALL(open)(path, flags);
         tm2 = darshan_core_wtime();
     }
 
@@ -457,7 +457,7 @@ int DARSHAN_DECL(__open_2)(const char *path, int oflag)
     MAP_OR_FAIL(__open_2);
 
     tm1 = darshan_core_wtime();
-    ret = __real___open_2(path, oflag);
+    ret = DARSHAN_REAL_CALL(__open_2)(path, oflag);
     tm2 = darshan_core_wtime();
 
     POSIX_PRE_RECORD();
@@ -483,13 +483,13 @@ int DARSHAN_DECL(open64)(const char *path, int flags, ...)
         va_end(arg);
 
         tm1 = darshan_core_wtime();
-        ret = __real_open64(path, flags, mode);
+        ret = DARSHAN_REAL_CALL(open64)(path, flags, mode);
         tm2 = darshan_core_wtime();
     }
     else
     {
         tm1 = darshan_core_wtime();
-        ret = __real_open64(path, flags);
+        ret = DARSHAN_REAL_CALL(open64)(path, flags);
         tm2 = darshan_core_wtime();
     }
 
@@ -519,13 +519,13 @@ int DARSHAN_DECL(openat)(int dirfd, const char *pathname, int flags, ...)
         va_end(arg);
 
         tm1 = darshan_core_wtime();
-        ret = __real_openat(dirfd, pathname, flags, mode);
+        ret = DARSHAN_REAL_CALL(openat)(dirfd, pathname, flags, mode);
         tm2 = darshan_core_wtime();
     }
     else
     {
         tm1 = darshan_core_wtime();
-        ret = __real_openat(dirfd, pathname, flags);
+        ret = DARSHAN_REAL_CALL(openat)(dirfd, pathname, flags);
         tm2 = darshan_core_wtime();
     }
 
@@ -590,13 +590,13 @@ int DARSHAN_DECL(openat64)(int dirfd, const char *pathname, int flags, ...)
         va_end(arg);
 
         tm1 = darshan_core_wtime();
-        ret = __real_openat64(dirfd, pathname, flags, mode);
+        ret = DARSHAN_REAL_CALL(openat64)(dirfd, pathname, flags, mode);
         tm2 = darshan_core_wtime();
     }
     else
     {
         tm1 = darshan_core_wtime();
-        ret = __real_openat64(dirfd, pathname, flags);
+        ret = DARSHAN_REAL_CALL(openat64)(dirfd, pathname, flags);
         tm2 = darshan_core_wtime();
     }
 
@@ -650,7 +650,7 @@ int DARSHAN_DECL(creat)(const char* path, mode_t mode)
     MAP_OR_FAIL(creat);
 
     tm1 = darshan_core_wtime();
-    ret = __real_creat(path, mode);
+    ret = DARSHAN_REAL_CALL(creat)(path, mode);
     tm2 = darshan_core_wtime();
 
     POSIX_PRE_RECORD();
@@ -668,7 +668,7 @@ int DARSHAN_DECL(creat64)(const char* path, mode_t mode)
     MAP_OR_FAIL(creat64);
 
     tm1 = darshan_core_wtime();
-    ret = __real_creat64(path, mode);
+    ret = DARSHAN_REAL_CALL(creat64)(path, mode);
     tm2 = darshan_core_wtime();
 
     POSIX_PRE_RECORD();
@@ -687,7 +687,7 @@ int DARSHAN_DECL(dup)(int oldfd)
     MAP_OR_FAIL(dup);
 
     tm1 = darshan_core_wtime();
-    ret = __real_dup(oldfd);
+    ret = DARSHAN_REAL_CALL(dup)(oldfd);
     tm2 = darshan_core_wtime();
 
     if(ret >= 0)
@@ -711,7 +711,7 @@ int DARSHAN_DECL(dup2)(int oldfd, int newfd)
     MAP_OR_FAIL(dup2);
 
     tm1 = darshan_core_wtime();
-    ret = __real_dup2(oldfd, newfd);
+    ret = DARSHAN_REAL_CALL(dup2)(oldfd, newfd);
     tm2 = darshan_core_wtime();
 
     if(ret >=0)
@@ -735,7 +735,7 @@ int DARSHAN_DECL(dup3)(int oldfd, int newfd, int flags)
     MAP_OR_FAIL(dup3);
 
     tm1 = darshan_core_wtime();
-    ret = __real_dup3(oldfd, newfd, flags);
+    ret = DARSHAN_REAL_CALL(dup3)(oldfd, newfd, flags);
     tm2 = darshan_core_wtime();
 
     if(ret >=0)
@@ -760,7 +760,7 @@ int DARSHAN_DECL(fileno)(FILE *stream)
     MAP_OR_FAIL(fileno);
 
     tm1 = darshan_core_wtime();
-    ret = __real_fileno(stream);
+    ret = DARSHAN_REAL_CALL(fileno)(stream);
     tm2 = darshan_core_wtime();
 
     if(ret >= 0)
@@ -791,7 +791,7 @@ int DARSHAN_DECL(mkstemp)(char* template)
     MAP_OR_FAIL(mkstemp);
 
     tm1 = darshan_core_wtime();
-    ret = __real_mkstemp(template);
+    ret = DARSHAN_REAL_CALL(mkstemp)(template);
     tm2 = darshan_core_wtime();
 
     POSIX_PRE_RECORD();
@@ -809,7 +809,7 @@ int DARSHAN_DECL(mkostemp)(char* template, int flags)
     MAP_OR_FAIL(mkostemp);
 
     tm1 = darshan_core_wtime();
-    ret = __real_mkostemp(template, flags);
+    ret = DARSHAN_REAL_CALL(mkostemp)(template, flags);
     tm2 = darshan_core_wtime();
 
     POSIX_PRE_RECORD();
@@ -827,7 +827,7 @@ int DARSHAN_DECL(mkstemps)(char* template, int suffixlen)
     MAP_OR_FAIL(mkstemps);
 
     tm1 = darshan_core_wtime();
-    ret = __real_mkstemps(template, suffixlen);
+    ret = DARSHAN_REAL_CALL(mkstemps)(template, suffixlen);
     tm2 = darshan_core_wtime();
 
     POSIX_PRE_RECORD();
@@ -845,7 +845,7 @@ int DARSHAN_DECL(mkostemps)(char* template, int suffixlen, int flags)
     MAP_OR_FAIL(mkostemps);
 
     tm1 = darshan_core_wtime();
-    ret = __real_mkostemps(template, suffixlen, flags);
+    ret = DARSHAN_REAL_CALL(mkostemps)(template, suffixlen, flags);
     tm2 = darshan_core_wtime();
 
     POSIX_PRE_RECORD();
@@ -866,7 +866,7 @@ ssize_t DARSHAN_DECL(read)(int fd, void *buf, size_t count)
     if((unsigned long)buf % darshan_mem_alignment == 0) aligned_flag = 1;
 
     tm1 = darshan_core_wtime();
-    ret = __real_read(fd, buf, count);
+    ret = DARSHAN_REAL_CALL(read)(fd, buf, count);
     tm2 = darshan_core_wtime();
 
     POSIX_PRE_RECORD();
@@ -887,7 +887,7 @@ ssize_t DARSHAN_DECL(write)(int fd, const void *buf, size_t count)
     if((unsigned long)buf % darshan_mem_alignment == 0) aligned_flag = 1;
 
     tm1 = darshan_core_wtime();
-    ret = __real_write(fd, buf, count);
+    ret = DARSHAN_REAL_CALL(write)(fd, buf, count);
     tm2 = darshan_core_wtime();
 
     POSIX_PRE_RECORD();
@@ -908,7 +908,7 @@ ssize_t DARSHAN_DECL(pread)(int fd, void *buf, size_t count, off_t offset)
     if((unsigned long)buf % darshan_mem_alignment == 0) aligned_flag = 1;
 
     tm1 = darshan_core_wtime();
-    ret = __real_pread(fd, buf, count, offset);
+    ret = DARSHAN_REAL_CALL(pread)(fd, buf, count, offset);
     tm2 = darshan_core_wtime();
 
     POSIX_PRE_RECORD();
@@ -929,7 +929,7 @@ ssize_t DARSHAN_DECL(pwrite)(int fd, const void *buf, size_t count, off_t offset
     if((unsigned long)buf % darshan_mem_alignment == 0) aligned_flag = 1;
 
     tm1 = darshan_core_wtime();
-    ret = __real_pwrite(fd, buf, count, offset);
+    ret = DARSHAN_REAL_CALL(pwrite)(fd, buf, count, offset);
     tm2 = darshan_core_wtime();
 
     POSIX_PRE_RECORD();
@@ -950,7 +950,7 @@ ssize_t DARSHAN_DECL(pread64)(int fd, void *buf, size_t count, off64_t offset)
     if((unsigned long)buf % darshan_mem_alignment == 0) aligned_flag = 1;
 
     tm1 = darshan_core_wtime();
-    ret = __real_pread64(fd, buf, count, offset);
+    ret = DARSHAN_REAL_CALL(pread64)(fd, buf, count, offset);
     tm2 = darshan_core_wtime();
 
     POSIX_PRE_RECORD();
@@ -971,7 +971,7 @@ ssize_t DARSHAN_DECL(pwrite64)(int fd, const void *buf, size_t count, off64_t of
     if((unsigned long)buf % darshan_mem_alignment == 0) aligned_flag = 1;
 
     tm1 = darshan_core_wtime();
-    ret = __real_pwrite64(fd, buf, count, offset);
+    ret = DARSHAN_REAL_CALL(pwrite64)(fd, buf, count, offset);
     tm2 = darshan_core_wtime();
 
     POSIX_PRE_RECORD();
@@ -997,7 +997,7 @@ ssize_t DARSHAN_DECL(readv)(int fd, const struct iovec *iov, int iovcnt)
     }
 
     tm1 = darshan_core_wtime();
-    ret = __real_readv(fd, iov, iovcnt);
+    ret = DARSHAN_REAL_CALL(readv)(fd, iov, iovcnt);
     tm2 = darshan_core_wtime();
 
     POSIX_PRE_RECORD();
@@ -1024,7 +1024,7 @@ ssize_t DARSHAN_DECL(preadv)(int fd, const struct iovec *iov, int iovcnt, off_t 
     }
 
     tm1 = darshan_core_wtime();
-    ret = __real_preadv(fd, iov, iovcnt, offset);
+    ret = DARSHAN_REAL_CALL(preadv)(fd, iov, iovcnt, offset);
     tm2 = darshan_core_wtime();
 
     POSIX_PRE_RECORD();
@@ -1050,7 +1050,7 @@ ssize_t DARSHAN_DECL(preadv64)(int fd, const struct iovec *iov, int iovcnt, off6
     }
 
     tm1 = darshan_core_wtime();
-    ret = __real_preadv64(fd, iov, iovcnt, offset);
+    ret = DARSHAN_REAL_CALL(preadv64)(fd, iov, iovcnt, offset);
     tm2 = darshan_core_wtime();
 
     POSIX_PRE_RECORD();
@@ -1079,7 +1079,7 @@ ssize_t DARSHAN_DECL(preadv2)(int fd, const struct iovec *iov, int iovcnt, off_t
     }
 
     tm1 = darshan_core_wtime();
-    ret = __real_preadv2(fd, iov, iovcnt, offset, flags);
+    ret = DARSHAN_REAL_CALL(preadv2)(fd, iov, iovcnt, offset, flags);
     tm2 = darshan_core_wtime();
 
     POSIX_PRE_RECORD();
@@ -1105,7 +1105,7 @@ ssize_t DARSHAN_DECL(preadv64v2)(int fd, const struct iovec *iov, int iovcnt, of
     }
 
     tm1 = darshan_core_wtime();
-    ret = __real_preadv64v2(fd, iov, iovcnt, offset, flags);
+    ret = DARSHAN_REAL_CALL(preadv64v2)(fd, iov, iovcnt, offset, flags);
     tm2 = darshan_core_wtime();
 
     POSIX_PRE_RECORD();
@@ -1132,7 +1132,7 @@ ssize_t DARSHAN_DECL(writev)(int fd, const struct iovec *iov, int iovcnt)
     }
 
     tm1 = darshan_core_wtime();
-    ret = __real_writev(fd, iov, iovcnt);
+    ret = DARSHAN_REAL_CALL(writev)(fd, iov, iovcnt);
     tm2 = darshan_core_wtime();
 
     POSIX_PRE_RECORD();
@@ -1159,7 +1159,7 @@ ssize_t DARSHAN_DECL(pwritev)(int fd, const struct iovec *iov, int iovcnt, off_t
     }
 
     tm1 = darshan_core_wtime();
-    ret = __real_pwritev(fd, iov, iovcnt, offset);
+    ret = DARSHAN_REAL_CALL(pwritev)(fd, iov, iovcnt, offset);
     tm2 = darshan_core_wtime();
 
     POSIX_PRE_RECORD();
@@ -1185,7 +1185,7 @@ ssize_t DARSHAN_DECL(pwritev64)(int fd, const struct iovec *iov, int iovcnt, off
     }
 
     tm1 = darshan_core_wtime();
-    ret = __real_pwritev64(fd, iov, iovcnt, offset);
+    ret = DARSHAN_REAL_CALL(pwritev64)(fd, iov, iovcnt, offset);
     tm2 = darshan_core_wtime();
 
     POSIX_PRE_RECORD();
@@ -1213,7 +1213,7 @@ ssize_t DARSHAN_DECL(pwritev2)(int fd, const struct iovec *iov, int iovcnt, off_
     }
 
     tm1 = darshan_core_wtime();
-    ret = __real_pwritev2(fd, iov, iovcnt, offset, flags);
+    ret = DARSHAN_REAL_CALL(pwritev2)(fd, iov, iovcnt, offset, flags);
     tm2 = darshan_core_wtime();
 
     POSIX_PRE_RECORD();
@@ -1239,7 +1239,7 @@ ssize_t DARSHAN_DECL(pwritev64v2)(int fd, const struct iovec *iov, int iovcnt, o
     }
 
     tm1 = darshan_core_wtime();
-    ret = __real_pwritev64v2(fd, iov, iovcnt, offset, flags);
+    ret = DARSHAN_REAL_CALL(pwritev64v2)(fd, iov, iovcnt, offset, flags);
     tm2 = darshan_core_wtime();
 
     POSIX_PRE_RECORD();
@@ -1260,7 +1260,7 @@ off_t DARSHAN_DECL(lseek)(int fd, off_t offset, int whence)
     MAP_OR_FAIL(lseek);
 
     tm1 = darshan_core_wtime();
-    ret = __real_lseek(fd, offset, whence);
+    ret = DARSHAN_REAL_CALL(lseek)(fd, offset, whence);
     tm2 = darshan_core_wtime();
 
     if(ret >= 0)
@@ -1290,7 +1290,7 @@ off64_t DARSHAN_DECL(lseek64)(int fd, off64_t offset, int whence)
     MAP_OR_FAIL(lseek64);
 
     tm1 = darshan_core_wtime();
-    ret = __real_lseek64(fd, offset, whence);
+    ret = DARSHAN_REAL_CALL(lseek64)(fd, offset, whence);
     tm2 = darshan_core_wtime();
 
     if(ret >= 0)
@@ -1319,7 +1319,7 @@ int DARSHAN_DECL(__xstat)(int vers, const char *path, struct stat *buf)
     MAP_OR_FAIL(__xstat);
 
     tm1 = darshan_core_wtime();
-    ret = __real___xstat(vers, path, buf);
+    ret = DARSHAN_REAL_CALL(__xstat)(vers, path, buf);
     tm2 = darshan_core_wtime();
 
     if(ret < 0 || !S_ISREG(buf->st_mode))
@@ -1340,7 +1340,7 @@ int DARSHAN_DECL(__xstat64)(int vers, const char *path, struct stat64 *buf)
     MAP_OR_FAIL(__xstat64);
 
     tm1 = darshan_core_wtime();
-    ret = __real___xstat64(vers, path, buf);
+    ret = DARSHAN_REAL_CALL(__xstat64)(vers, path, buf);
     tm2 = darshan_core_wtime();
 
     if(ret < 0 || !S_ISREG(buf->st_mode))
@@ -1361,7 +1361,7 @@ int DARSHAN_DECL(__lxstat)(int vers, const char *path, struct stat *buf)
     MAP_OR_FAIL(__lxstat);
 
     tm1 = darshan_core_wtime();
-    ret = __real___lxstat(vers, path, buf);
+    ret = DARSHAN_REAL_CALL(__lxstat)(vers, path, buf);
     tm2 = darshan_core_wtime();
 
     if(ret < 0 || !S_ISREG(buf->st_mode))
@@ -1382,7 +1382,7 @@ int DARSHAN_DECL(__lxstat64)(int vers, const char *path, struct stat64 *buf)
     MAP_OR_FAIL(__lxstat64);
 
     tm1 = darshan_core_wtime();
-    ret = __real___lxstat64(vers, path, buf);
+    ret = DARSHAN_REAL_CALL(__lxstat64)(vers, path, buf);
     tm2 = darshan_core_wtime();
 
     if(ret < 0 || !S_ISREG(buf->st_mode))
@@ -1404,7 +1404,7 @@ int DARSHAN_DECL(__fxstat)(int vers, int fd, struct stat *buf)
     MAP_OR_FAIL(__fxstat);
 
     tm1 = darshan_core_wtime();
-    ret = __real___fxstat(vers, fd, buf);
+    ret = DARSHAN_REAL_CALL(__fxstat)(vers, fd, buf);
     tm2 = darshan_core_wtime();
 
     if(ret < 0 || !S_ISREG(buf->st_mode))
@@ -1430,7 +1430,7 @@ int DARSHAN_DECL(__fxstat64)(int vers, int fd, struct stat64 *buf)
     MAP_OR_FAIL(__fxstat64);
 
     tm1 = darshan_core_wtime();
-    ret = __real___fxstat64(vers, fd, buf);
+    ret = DARSHAN_REAL_CALL(__fxstat64)(vers, fd, buf);
     tm2 = darshan_core_wtime();
 
     if(ret < 0 || !S_ISREG(buf->st_mode))
@@ -1461,10 +1461,10 @@ void* DARSHAN_DECL(mmap)(void *addr, size_t length, int prot, int flags,
         /* mmap is not associated with a backing file; skip all Darshan
          * characterization attempts.
          */
-        return(__real_mmap(addr, length, prot, flags, fd, offset));
+        return(DARSHAN_REAL_CALL(mmap)(addr, length, prot, flags, fd, offset));
     }
 
-    ret = __real_mmap(addr, length, prot, flags, fd, offset);
+    ret = DARSHAN_REAL_CALL(mmap)(addr, length, prot, flags, fd, offset);
     if(ret == MAP_FAILED)
         return(ret);
 
@@ -1494,10 +1494,10 @@ void* DARSHAN_DECL(mmap64)(void *addr, size_t length, int prot, int flags,
         /* mmap is not associated with a backing file; skip all Darshan
          * characterization attempts.
          */
-        return(__real_mmap64(addr, length, prot, flags, fd, offset));
+        return(DARSHAN_REAL_CALL(mmap64)(addr, length, prot, flags, fd, offset));
     }
 
-    ret = __real_mmap64(addr, length, prot, flags, fd, offset);
+    ret = DARSHAN_REAL_CALL(mmap64)(addr, length, prot, flags, fd, offset);
     if(ret == MAP_FAILED)
         return(ret);
 
@@ -1522,7 +1522,7 @@ int DARSHAN_DECL(fsync)(int fd)
     MAP_OR_FAIL(fsync);
 
     tm1 = darshan_core_wtime();
-    ret = __real_fsync(fd);
+    ret = DARSHAN_REAL_CALL(fsync)(fd);
     tm2 = darshan_core_wtime();
 
     if(ret < 0)
@@ -1551,7 +1551,7 @@ int DARSHAN_DECL(fdatasync)(int fd)
     MAP_OR_FAIL(fdatasync);
 
     tm1 = darshan_core_wtime();
-    ret = __real_fdatasync(fd);
+    ret = DARSHAN_REAL_CALL(fdatasync)(fd);
     tm2 = darshan_core_wtime();
 
     if(ret < 0)
@@ -1580,7 +1580,7 @@ int DARSHAN_DECL(close)(int fd)
     MAP_OR_FAIL(close);
 
     tm1 = darshan_core_wtime();
-    ret = __real_close(fd);
+    ret = DARSHAN_REAL_CALL(close)(fd);
     tm2 = darshan_core_wtime();
 
     POSIX_PRE_RECORD();
@@ -1609,7 +1609,7 @@ int DARSHAN_DECL(aio_read)(struct aiocb *aiocbp)
 
     MAP_OR_FAIL(aio_read);
 
-    ret = __real_aio_read(aiocbp);
+    ret = DARSHAN_REAL_CALL(aio_read)(aiocbp);
     if(ret == 0)
     {
         POSIX_PRE_RECORD();
@@ -1626,7 +1626,7 @@ int DARSHAN_DECL(aio_write)(struct aiocb *aiocbp)
 
     MAP_OR_FAIL(aio_write);
 
-    ret = __real_aio_write(aiocbp);
+    ret = DARSHAN_REAL_CALL(aio_write)(aiocbp);
     if(ret == 0)
     {
         POSIX_PRE_RECORD();
@@ -1643,7 +1643,7 @@ int DARSHAN_DECL(aio_read64)(struct aiocb64 *aiocbp)
 
     MAP_OR_FAIL(aio_read64);
 
-    ret = __real_aio_read64(aiocbp);
+    ret = DARSHAN_REAL_CALL(aio_read64)(aiocbp);
     if(ret == 0)
     {
         POSIX_PRE_RECORD();
@@ -1660,7 +1660,7 @@ int DARSHAN_DECL(aio_write64)(struct aiocb64 *aiocbp)
 
     MAP_OR_FAIL(aio_write64);
 
-    ret = __real_aio_write64(aiocbp);
+    ret = DARSHAN_REAL_CALL(aio_write64)(aiocbp);
     if(ret == 0)
     {
         POSIX_PRE_RECORD();
@@ -1680,7 +1680,7 @@ ssize_t DARSHAN_DECL(aio_return)(struct aiocb *aiocbp)
 
     MAP_OR_FAIL(aio_return);
 
-    ret = __real_aio_return(aiocbp);
+    ret = DARSHAN_REAL_CALL(aio_return)(aiocbp);
     tm2 = darshan_core_wtime();
 
     POSIX_PRE_RECORD();
@@ -1717,7 +1717,7 @@ ssize_t DARSHAN_DECL(aio_return64)(struct aiocb64 *aiocbp)
 
     MAP_OR_FAIL(aio_return64);
 
-    ret = __real_aio_return64(aiocbp);
+    ret = DARSHAN_REAL_CALL(aio_return64)(aiocbp);
     tm2 = darshan_core_wtime();
 
     POSIX_PRE_RECORD();
@@ -1753,7 +1753,7 @@ int DARSHAN_DECL(lio_listio)(int mode, struct aiocb *const aiocb_list[],
 
     MAP_OR_FAIL(lio_listio);
 
-    ret = __real_lio_listio(mode, aiocb_list, nitems, sevp);
+    ret = DARSHAN_REAL_CALL(lio_listio)(mode, aiocb_list, nitems, sevp);
     if(ret == 0)
     {
         POSIX_PRE_RECORD();
@@ -1775,7 +1775,7 @@ int DARSHAN_DECL(lio_listio64)(int mode, struct aiocb64 *const aiocb_list[],
 
     MAP_OR_FAIL(lio_listio64);
 
-    ret = __real_lio_listio64(mode, aiocb_list, nitems, sevp);
+    ret = DARSHAN_REAL_CALL(lio_listio64)(mode, aiocb_list, nitems, sevp);
     if(ret == 0)
     {
         POSIX_PRE_RECORD();
@@ -1808,7 +1808,7 @@ int DARSHAN_DECL(rename)(const char *oldpath, const char *newpath)
     MAP_OR_FAIL(rename);
 
     tm1 = darshan_core_wtime();
-    ret = __real_rename(oldpath, newpath);
+    ret = DARSHAN_REAL_CALL(rename)(oldpath, newpath);
     tm2 = darshan_core_wtime();
 
     if(disabled)

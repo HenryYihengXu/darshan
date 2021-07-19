@@ -178,7 +178,7 @@ int DARSHAN_DECL(foo)(const char* name, int arg1)
      * given wrapper function. Timers are used to record the duration of this
      * operation. */
     tm1 = darshan_core_wtime();
-    ret = __real_foo(name, arg1);
+    ret = DARSHAN_REAL_CALL(foo)(name, arg1);
     tm2 = darshan_core_wtime();
 
     NULL_PRE_RECORD();

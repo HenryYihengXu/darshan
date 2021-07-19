@@ -172,9 +172,9 @@ extern char *darshan_posix_lookup_record_name(int fd);
 
 /* we need access to fileno (defined in POSIX module) for instrumenting fopen calls */
 #ifdef DARSHAN_PRELOAD
-extern int (*__real_fileno)(FILE *stream);
+extern int (*DARSHAN_REAL_CALL(fileno))(FILE *stream);
 #else
-extern int __real_fileno(FILE *stream);
+extern int DARSHAN_REAL_CALL(fileno)(FILE *stream);
 #endif
 
 #define STDIO_LOCK() pthread_mutex_lock(&stdio_runtime_mutex)
@@ -215,7 +215,7 @@ extern int __real_fileno(FILE *stream);
         break; \
     } \
     _STDIO_RECORD_OPEN(__ret, __rec_ref, __tm1, __tm2, 1, -1); \
-    __fd = __real_fileno(__ret); \
+    __fd = DARSHAN_REAL_CALL(fileno)(__ret); \
     darshan_instrument_fs_data(__rec_ref->fs_type, __newpath, __fd); \
     if(__newpath != (char*)__path) free(__newpath); \
 } while(0)
@@ -285,7 +285,7 @@ FILE* DARSHAN_DECL(fopen)(const char *path, const char *mode)
     MAP_OR_FAIL(fopen);
 
     tm1 = darshan_core_wtime();
-    ret = __real_fopen(path, mode);
+    ret = DARSHAN_REAL_CALL(fopen)(path, mode);
     tm2 = darshan_core_wtime();
 
     STDIO_PRE_RECORD();
@@ -303,7 +303,7 @@ FILE* DARSHAN_DECL(fopen64)(const char *path, const char *mode)
     MAP_OR_FAIL(fopen64);
 
     tm1 = darshan_core_wtime();
-    ret = __real_fopen64(path, mode);
+    ret = DARSHAN_REAL_CALL(fopen64)(path, mode);
     tm2 = darshan_core_wtime();
 
     STDIO_PRE_RECORD();
@@ -323,7 +323,7 @@ FILE* DARSHAN_DECL(fdopen)(int fd, const char *mode)
     MAP_OR_FAIL(fdopen);
 
     tm1 = darshan_core_wtime();
-    ret = __real_fdopen(fd, mode);
+    ret = DARSHAN_REAL_CALL(fdopen)(fd, mode);
     tm2 = darshan_core_wtime();
 
     if(ret)
@@ -355,7 +355,7 @@ FILE* DARSHAN_DECL(freopen)(const char *path, const char *mode, FILE *stream)
     MAP_OR_FAIL(freopen);
 
     tm1 = darshan_core_wtime();
-    ret = __real_freopen(path, mode, stream);
+    ret = DARSHAN_REAL_CALL(freopen)(path, mode, stream);
     tm2 = darshan_core_wtime();
 
     STDIO_PRE_RECORD();
@@ -373,7 +373,7 @@ FILE* DARSHAN_DECL(freopen64)(const char *path, const char *mode, FILE *stream)
     MAP_OR_FAIL(freopen64);
 
     tm1 = darshan_core_wtime();
-    ret = __real_freopen64(path, mode, stream);
+    ret = DARSHAN_REAL_CALL(freopen64)(path, mode, stream);
     tm2 = darshan_core_wtime();
 
     STDIO_PRE_RECORD();
@@ -392,7 +392,7 @@ int DARSHAN_DECL(fflush)(FILE *fp)
     MAP_OR_FAIL(fflush);
 
     tm1 = darshan_core_wtime();
-    ret = __real_fflush(fp);
+    ret = DARSHAN_REAL_CALL(fflush)(fp);
     tm2 = darshan_core_wtime();
 
     STDIO_PRE_RECORD();
@@ -412,7 +412,7 @@ int DARSHAN_DECL(fclose)(FILE *fp)
     MAP_OR_FAIL(fclose);
 
     tm1 = darshan_core_wtime();
-    ret = __real_fclose(fp);
+    ret = DARSHAN_REAL_CALL(fclose)(fp);
     tm2 = darshan_core_wtime();
 
     STDIO_PRE_RECORD();
@@ -441,7 +441,7 @@ size_t DARSHAN_DECL(fwrite)(const void *ptr, size_t size, size_t nmemb, FILE *st
     MAP_OR_FAIL(fwrite);
 
     tm1 = darshan_core_wtime();
-    ret = __real_fwrite(ptr, size, nmemb, stream);
+    ret = DARSHAN_REAL_CALL(fwrite)(ptr, size, nmemb, stream);
     tm2 = darshan_core_wtime();
 
     STDIO_PRE_RECORD();
@@ -461,7 +461,7 @@ int DARSHAN_DECL(fputc)(int c, FILE *stream)
     MAP_OR_FAIL(fputc);
 
     tm1 = darshan_core_wtime();
-    ret = __real_fputc(c, stream);
+    ret = DARSHAN_REAL_CALL(fputc)(c, stream);
     tm2 = darshan_core_wtime();
 
     STDIO_PRE_RECORD();
@@ -480,7 +480,7 @@ int DARSHAN_DECL(putw)(int w, FILE *stream)
     MAP_OR_FAIL(putw);
 
     tm1 = darshan_core_wtime();
-    ret = __real_putw(w, stream);
+    ret = DARSHAN_REAL_CALL(putw)(w, stream);
     tm2 = darshan_core_wtime();
 
     STDIO_PRE_RECORD();
@@ -501,7 +501,7 @@ int DARSHAN_DECL(fputs)(const char *s, FILE *stream)
     MAP_OR_FAIL(fputs);
 
     tm1 = darshan_core_wtime();
-    ret = __real_fputs(s, stream);
+    ret = DARSHAN_REAL_CALL(fputs)(s, stream);
     tm2 = darshan_core_wtime();
 
     STDIO_PRE_RECORD();
@@ -520,7 +520,7 @@ int DARSHAN_DECL(vprintf)(const char *format, va_list ap)
     MAP_OR_FAIL(vprintf);
 
     tm1 = darshan_core_wtime();
-    ret = __real_vprintf(format, ap);
+    ret = DARSHAN_REAL_CALL(vprintf)(format, ap);
     tm2 = darshan_core_wtime();
 
     STDIO_PRE_RECORD();
@@ -539,7 +539,7 @@ int DARSHAN_DECL(vfprintf)(FILE *stream, const char *format, va_list ap)
     MAP_OR_FAIL(vfprintf);
 
     tm1 = darshan_core_wtime();
-    ret = __real_vfprintf(stream, format, ap);
+    ret = DARSHAN_REAL_CALL(vfprintf)(stream, format, ap);
     tm2 = darshan_core_wtime();
 
     STDIO_PRE_RECORD();
@@ -564,7 +564,7 @@ int DARSHAN_DECL(printf)(const char *format, ...)
      * length arguments.
      */
     va_start(ap, format);
-    ret = __real_vprintf(format, ap);
+    ret = DARSHAN_REAL_CALL(vprintf)(format, ap);
     va_end(ap);
     tm2 = darshan_core_wtime();
 
@@ -589,7 +589,7 @@ int DARSHAN_DECL(fprintf)(FILE *stream, const char *format, ...)
      * length arguments.
      */
     va_start(ap, format);
-    ret = __real_vfprintf(stream, format, ap);
+    ret = DARSHAN_REAL_CALL(vfprintf)(stream, format, ap);
     va_end(ap);
     tm2 = darshan_core_wtime();
 
@@ -609,7 +609,7 @@ size_t DARSHAN_DECL(fread)(void *ptr, size_t size, size_t nmemb, FILE *stream)
     MAP_OR_FAIL(fread);
 
     tm1 = darshan_core_wtime();
-    ret = __real_fread(ptr, size, nmemb, stream);
+    ret = DARSHAN_REAL_CALL(fread)(ptr, size, nmemb, stream);
     tm2 = darshan_core_wtime();
 
     STDIO_PRE_RECORD();
@@ -628,7 +628,7 @@ int DARSHAN_DECL(fgetc)(FILE *stream)
     MAP_OR_FAIL(fgetc);
 
     tm1 = darshan_core_wtime();
-    ret = __real_fgetc(stream);
+    ret = DARSHAN_REAL_CALL(fgetc)(stream);
     tm2 = darshan_core_wtime();
 
     STDIO_PRE_RECORD();
@@ -648,7 +648,7 @@ int DARSHAN_DECL(_IO_getc)(FILE *stream)
     MAP_OR_FAIL(_IO_getc);
 
     tm1 = darshan_core_wtime();
-    ret = __real__IO_getc(stream);
+    ret = DARSHAN_REAL_CALL(_IO_getc)(stream);
     tm2 = darshan_core_wtime();
 
     STDIO_PRE_RECORD();
@@ -668,7 +668,7 @@ int DARSHAN_DECL(_IO_putc)(int c, FILE *stream)
     MAP_OR_FAIL(_IO_putc);
 
     tm1 = darshan_core_wtime();
-    ret = __real__IO_putc(c, stream);
+    ret = DARSHAN_REAL_CALL(_IO_putc)(c, stream);
     tm2 = darshan_core_wtime();
 
     STDIO_PRE_RECORD();
@@ -687,7 +687,7 @@ int DARSHAN_DECL(getw)(FILE *stream)
     MAP_OR_FAIL(getw);
 
     tm1 = darshan_core_wtime();
-    ret = __real_getw(stream);
+    ret = DARSHAN_REAL_CALL(getw)(stream);
     tm2 = darshan_core_wtime();
 
     STDIO_PRE_RECORD();
@@ -717,7 +717,7 @@ int DARSHAN_DECL(__isoc99_fscanf)(FILE *stream, const char *format, ...)
      */
     start_off = ftell(stream);
     va_start(ap, format);
-    ret = __real_vfscanf(stream, format, ap);
+    ret = DARSHAN_REAL_CALL(vfscanf)(stream, format, ap);
     va_end(ap);
     end_off = ftell(stream);
     tm2 = darshan_core_wtime();
@@ -746,7 +746,7 @@ int DARSHAN_DECL(fscanf)(FILE *stream, const char *format, ...)
      */
     start_off = ftell(stream);
     va_start(ap, format);
-    ret = __real_vfscanf(stream, format, ap);
+    ret = DARSHAN_REAL_CALL(vfscanf)(stream, format, ap);
     va_end(ap);
     end_off = ftell(stream);
     tm2 = darshan_core_wtime();
@@ -769,7 +769,7 @@ int DARSHAN_DECL(vfscanf)(FILE *stream, const char *format, va_list ap)
 
     tm1 = darshan_core_wtime();
     start_off = ftell(stream);
-    ret = __real_vfscanf(stream, format, ap);
+    ret = DARSHAN_REAL_CALL(vfscanf)(stream, format, ap);
     end_off = ftell(stream);
     tm2 = darshan_core_wtime();
 
@@ -790,7 +790,7 @@ char* DARSHAN_DECL(fgets)(char *s, int size, FILE *stream)
     MAP_OR_FAIL(fgets);
 
     tm1 = darshan_core_wtime();
-    ret = __real_fgets(s, size, stream);
+    ret = DARSHAN_REAL_CALL(fgets)(s, size, stream);
     tm2 = darshan_core_wtime();
 
     STDIO_PRE_RECORD();
@@ -810,7 +810,7 @@ void DARSHAN_DECL(rewind)(FILE *stream)
     MAP_OR_FAIL(rewind);
 
     tm1 = darshan_core_wtime();
-    __real_rewind(stream);
+    DARSHAN_REAL_CALL(rewind)(stream);
     tm2 = darshan_core_wtime();
 
     /* NOTE: we don't use STDIO_PRE_RECORD here because there is no return
@@ -851,7 +851,7 @@ int DARSHAN_DECL(fseek)(FILE *stream, long offset, int whence)
     MAP_OR_FAIL(fseek);
 
     tm1 = darshan_core_wtime();
-    ret = __real_fseek(stream, offset, whence);
+    ret = DARSHAN_REAL_CALL(fseek)(stream, offset, whence);
     tm2 = darshan_core_wtime();
 
     if(ret >= 0)
@@ -881,7 +881,7 @@ int DARSHAN_DECL(fseeko)(FILE *stream, off_t offset, int whence)
     MAP_OR_FAIL(fseeko);
 
     tm1 = darshan_core_wtime();
-    ret = __real_fseeko(stream, offset, whence);
+    ret = DARSHAN_REAL_CALL(fseeko)(stream, offset, whence);
     tm2 = darshan_core_wtime();
 
     if(ret >= 0)
@@ -911,7 +911,7 @@ int DARSHAN_DECL(fseeko64)(FILE *stream, off64_t offset, int whence)
     MAP_OR_FAIL(fseeko64);
 
     tm1 = darshan_core_wtime();
-    ret = __real_fseeko64(stream, offset, whence);
+    ret = DARSHAN_REAL_CALL(fseeko64)(stream, offset, whence);
     tm2 = darshan_core_wtime();
 
     if(ret >= 0)
@@ -941,7 +941,7 @@ int DARSHAN_DECL(fsetpos)(FILE *stream, const fpos_t *pos)
     MAP_OR_FAIL(fsetpos);
 
     tm1 = darshan_core_wtime();
-    ret = __real_fsetpos(stream, pos);
+    ret = DARSHAN_REAL_CALL(fsetpos)(stream, pos);
     tm2 = darshan_core_wtime();
 
     if(ret >= 0)
@@ -971,7 +971,7 @@ int DARSHAN_DECL(fsetpos64)(FILE *stream, const fpos64_t *pos)
     MAP_OR_FAIL(fsetpos64);
 
     tm1 = darshan_core_wtime();
-    ret = __real_fsetpos64(stream, pos);
+    ret = DARSHAN_REAL_CALL(fsetpos64)(stream, pos);
     tm2 = darshan_core_wtime();
 
     if(ret >= 0)

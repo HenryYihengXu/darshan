@@ -235,7 +235,7 @@ int DARSHAN_DECL(mdhimInit)(mdhim_t *md, mdhim_options_t *opts)
     MDHIM_POST_RECORD();
 
     MAP_OR_FAIL(mdhimInit);
-    ret = __real_mdhimInit(md, opts);
+    ret = DARSHAN_REAL_CALL(_mdhimInit)(md, opts);
     return ret;
 
 }
@@ -258,7 +258,7 @@ mdhim_rm_t *DARSHAN_DECL(mdhimPut)(mdhim_t *md,
      * given wrapper function. Timers are used to record the duration of this
      * operation. */
     tm1 = darshan_core_wtime();
-    ret = __real_mdhimPut(md, index, key, key_len, value, value_len);
+    ret = DARSHAN_REAL_CALL(_mdhimPut)(md, index, key, key_len, value, value_len);
     tm2 = darshan_core_wtime();
 
     int server_id = mdhimWhichDB(md, key, key_len);
@@ -287,7 +287,7 @@ mdhim_grm_t * DARSHAN_DECL(mdhimGet)(mdhim_t *md,
      * given wrapper function. Timers are used to record the duration of this
      * operation. */
     tm1 = darshan_core_wtime();
-    ret = __real_mdhimGet(md, index, key, key_len, op);
+    ret = DARSHAN_REAL_CALL(_mdhimGet)(md, index, key, key_len, op);
     tm2 = darshan_core_wtime();
 
     int server_id = mdhimWhichDB(md, key, key_len);

@@ -208,7 +208,7 @@ hid_t DARSHAN_DECL(H5Fcreate)(const char *filename, unsigned flags,
     MAP_OR_FAIL(H5Fcreate);
 
     tm1 = darshan_core_wtime();
-    ret = __real_H5Fcreate(filename, flags, create_plist, access_plist);
+    ret = DARSHAN_REAL_CALL(H5Fcreate)(filename, flags, create_plist, access_plist);
     tm2 = darshan_core_wtime();
 
     if(ret >= 0)
@@ -284,7 +284,7 @@ hid_t DARSHAN_DECL(H5Fopen)(const char *filename, unsigned flags,
     MAP_OR_FAIL(H5Fopen);
 
     tm1 = darshan_core_wtime();
-    ret = __real_H5Fopen(filename, flags, access_plist);
+    ret = DARSHAN_REAL_CALL(H5Fopen)(filename, flags, access_plist);
     tm2 = darshan_core_wtime();
 
     if(ret >= 0)
@@ -323,7 +323,7 @@ herr_t DARSHAN_DECL(H5Fflush)(hid_t object_id, H5F_scope_t scope)
     MAP_OR_FAIL(H5Fflush);
 
     tm1 = darshan_core_wtime();
-    ret = __real_H5Fflush(object_id, scope);
+    ret = DARSHAN_REAL_CALL(H5Fflush)(object_id, scope);
     tm2 = darshan_core_wtime();
 
     /* convert object_id to file_id so we can look it up */
@@ -358,7 +358,7 @@ herr_t DARSHAN_DECL(H5Fclose)(hid_t file_id)
     MAP_OR_FAIL(H5Fclose);
 
     tm1 = darshan_core_wtime();
-    ret = __real_H5Fclose(file_id);
+    ret = DARSHAN_REAL_CALL(H5Fclose)(file_id);
     tm2 = darshan_core_wtime();
 
     if(ret >= 0)
@@ -475,7 +475,7 @@ hid_t DARSHAN_DECL(H5Dcreate1)(hid_t loc_id, const char *name, hid_t type_id, hi
     MAP_OR_FAIL(H5Dcreate1);
 
     tm1 = darshan_core_wtime();
-    ret = __real_H5Dcreate1(loc_id, name, type_id, space_id, dcpl_id);
+    ret = DARSHAN_REAL_CALL(H5Dcreate1)(loc_id, name, type_id, space_id, dcpl_id);
     tm2 = darshan_core_wtime();
 
     if(ret >= 0)
@@ -497,7 +497,7 @@ hid_t DARSHAN_DECL(H5Dcreate2)(hid_t loc_id, const char *name, hid_t dtype_id, h
     MAP_OR_FAIL(H5Dcreate2);
 
     tm1 = darshan_core_wtime();
-    ret = __real_H5Dcreate2(loc_id, name, dtype_id, space_id, lcpl_id, dcpl_id, dapl_id);
+    ret = DARSHAN_REAL_CALL(H5Dcreate2)(loc_id, name, dtype_id, space_id, lcpl_id, dcpl_id, dapl_id);
     tm2 = darshan_core_wtime();
 
     if(ret >= 0)
@@ -521,7 +521,7 @@ hid_t DARSHAN_DECL(H5Dopen1)(hid_t loc_id, const char *name)
     MAP_OR_FAIL(H5Dopen1);
 
     tm1 = darshan_core_wtime();
-    ret = __real_H5Dopen1(loc_id, name);
+    ret = DARSHAN_REAL_CALL(H5Dopen1)(loc_id, name);
     tm2 = darshan_core_wtime();
 
     if(ret >= 0)
@@ -567,7 +567,7 @@ hid_t DARSHAN_DECL(H5Dopen2)(hid_t loc_id, const char *name, hid_t dapl_id)
     MAP_OR_FAIL(H5Dopen2);
 
     tm1 = darshan_core_wtime();
-    ret = __real_H5Dopen2(loc_id, name, dapl_id);
+    ret = DARSHAN_REAL_CALL(H5Dopen2)(loc_id, name, dapl_id);
     tm2 = darshan_core_wtime();
 
     if(ret >= 0)
@@ -624,7 +624,7 @@ herr_t DARSHAN_DECL(H5Dread)(hid_t dataset_id, hid_t mem_type_id, hid_t mem_spac
     MAP_OR_FAIL(H5Dread);
 
     tm1 = darshan_core_wtime();
-    ret = __real_H5Dread(dataset_id, mem_type_id, mem_space_id, file_space_id,
+    ret = DARSHAN_REAL_CALL(H5Dread)(dataset_id, mem_type_id, mem_space_id, file_space_id,
         xfer_plist_id, buf);
     tm2 = darshan_core_wtime();
 
@@ -745,7 +745,7 @@ herr_t DARSHAN_DECL(H5Dwrite)(hid_t dataset_id, hid_t mem_type_id, hid_t mem_spa
     MAP_OR_FAIL(H5Dwrite);
 
     tm1 = darshan_core_wtime();
-    ret = __real_H5Dwrite(dataset_id, mem_type_id, mem_space_id, file_space_id,
+    ret = DARSHAN_REAL_CALL(H5Dwrite)(dataset_id, mem_type_id, mem_space_id, file_space_id,
         xfer_plist_id, buf);
     tm2 = darshan_core_wtime();
 
@@ -854,7 +854,7 @@ herr_t DARSHAN_DECL(H5Dflush)(hid_t dataset_id)
     MAP_OR_FAIL(H5Dflush);
 
     tm1 = darshan_core_wtime();
-    ret = __real_H5Dflush(dataset_id);
+    ret = DARSHAN_REAL_CALL(H5Dflush)(dataset_id);
     tm2 = darshan_core_wtime();
 
     if(ret >= 0)
@@ -885,7 +885,7 @@ herr_t DARSHAN_DECL(H5Dclose)(hid_t dataset_id)
     MAP_OR_FAIL(H5Dclose);
 
     tm1 = darshan_core_wtime();
-    ret = __real_H5Dclose(dataset_id);
+    ret = DARSHAN_REAL_CALL(H5Dclose)(dataset_id);
     tm2 = darshan_core_wtime();
 
     if(ret >= 0)
