@@ -32,7 +32,7 @@ CFLAGS = -DDARSHAN_CONFIG_H=\"darshan-runtime-config.h\" -I . -I ../ -I $(srcdir
 
 CFLAGS_SHARED = -DDARSHAN_CONFIG_H=\"darshan-runtime-config.h\" -I . -I$(srcdir) -I$(srcdir)/../ @CFLAGS@ @CPPFLAGS@ -D_LARGEFILE64_SOURCE -shared -fpic -DPIC -DDARSHAN_PRELOAD
 
-LIBS = -lpthread -lrt -lz -ldl @DARSHAN_LUSTRE_LD_FLAGS@
+LIBS = -lpthread -lrt -lz -ldl -lgotcha @DARSHAN_LUSTRE_LD_FLAGS@
 
 BUILD_NULL_MODULE = @BUILD_NULL_MODULE@
 BUILD_POSIX_MODULE = @BUILD_POSIX_MODULE@
@@ -115,6 +115,12 @@ endif
 
 lib::
 	@mkdir -p $@
+
+lib/gotcha-map-darshan-list.o: lib/gotcha-map-darshan-list.c gotcha-map-darshan-list.h darshan.h darshan-posix.h darshan-stdio.h darshan-mpiio.h darshan-core-init-finalize.h darshan-hdf5.h darshan-mdhim.h darshan-null.h darshan-pnetcdf.h $(DARSHAN_LOG_FORMAT) | lib
+	$(CC) $(CFLAGS) -c $< -o $@
+
+lib/gotcha-map-darshan-list.po: lib/gotcha-map-darshan-list.c gotcha-map-darshan-list.h darshan.h darshan-posix.h darshan-stdio.h darshan-mpiio.h darshan-core-init-finalize.h darshan-hdf5.h darshan-mdhim.h darshan-null.h darshan-pnetcdf.h $(DARSHAN_LOG_FORMAT) | lib
+	$(CC) $(CFLAGS_SHARED) -c $< -o $@
 
 lib/darshan-core-init-finalize.o: lib/darshan-core-init-finalize.c darshan.h darshan-core.h $(DARSHAN_LOG_FORMAT) | lib
 	$(CC) $(CFLAGS) -c $< -o $@

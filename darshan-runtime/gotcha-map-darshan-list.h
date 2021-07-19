@@ -4,9 +4,9 @@
 
 /* define gotcha-specific state to use with our wrapper */
 #define DARSHAN_WRAPPEE_HANDLE_DECL(func) \
-gotcha_wrappee_handle_t wrappee_handle_##func
+gotcha_wrappee_handle_t darshan_wrappee_handle_##func
 
-#define DARSHAN_WRAPPEE_HANDLE(func) wrappee_handle_##func
+#define DARSHAN_WRAPPEE_HANDLE(func) darshan_wrappee_handle_##func
 
 /* posix I/O */
 DARSHAN_WRAPPEE_HANDLE_DECL(open);
