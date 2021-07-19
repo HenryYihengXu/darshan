@@ -146,6 +146,8 @@ int DARSHAN_DECL(MPI_Init)(int *argc, char ***argv)
         /* we don't see argc and argv here in fortran */
         darshan_core_initialize(0, NULL);
     }
+    int priority = 3;
+    setup_darshan_gotcha_wrapper(priority);
 
     return(ret);
 }

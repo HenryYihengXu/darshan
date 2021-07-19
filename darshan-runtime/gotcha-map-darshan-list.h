@@ -172,5 +172,5 @@ DARSHAN_WRAPPEE_HANDLE_DECL(ncmpi_create);
 DARSHAN_WRAPPEE_HANDLE_DECL(ncmpi_open);
 DARSHAN_WRAPPEE_HANDLE_DECL(ncmpi_close);
 
-int setup_gotcha_wrappers(void);
+int setup_darshan_gotcha_wrappers(int priority);
 #endif /* DARSHAN_GOTCHA */

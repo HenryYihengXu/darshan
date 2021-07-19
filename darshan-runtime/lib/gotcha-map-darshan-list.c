@@ -178,10 +178,16 @@ struct gotcha_binding_t darshan_wrappers[] = {
 
 #define GOTCHA_NFUNCS (sizeof(darshan_wrappers) / sizeof(gotcha_binding_t))
 
-int setup_gotcha_wrappers(void)
+int setup_darshan_gotcha_wrappers(int priority)
 {
     /* insert our I/O wrappers using gotcha */
+    fprintf(stderr, "recorder setup gotcha wrappers with priority = %d\n", priority);
     enum gotcha_error_t result;
+    result = gotcha_set_priority("darshan", priority);
+    if (result != GOTCHA_SUCCESS) {
+      printf("gotcha_darshan_set_priority returned %d\n", (int) result);
+      return -1;
+    }
     result = gotcha_wrap(darshan_wrappers, GOTCHA_NFUNCS, "darshan");
     if (result != GOTCHA_SUCCESS) {
         fprintf(stderr, "gotcha_wrap() returned %d\n", (int) result);
