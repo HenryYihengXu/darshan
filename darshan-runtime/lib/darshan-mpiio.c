@@ -26,6 +26,10 @@
 #include "darshan-dynamic.h"
 #include "darshan-dxt.h"
 
+#ifdef DARSHAN_GOTCHA
+#include gotcha-map-darshan-list.h
+#endif
+
 #ifndef DARSHAN_GOTCHA
 DARSHAN_FORWARD_DECL(PMPI_File_close, int, (MPI_File *fh));
 DARSHAN_FORWARD_DECL(PMPI_File_iread_at, int, (MPI_File fh, MPI_Offset offset, void *buf, int count, MPI_Datatype datatype, __D_MPI_REQUEST *request));

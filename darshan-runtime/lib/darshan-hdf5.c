@@ -26,6 +26,10 @@
 
 #include <hdf5.h>
 
+#ifdef DARSHAN_GOTCHA
+#include gotcha-map-darshan-list.h
+#endif
+
 /* H5F prototypes */
 DARSHAN_FORWARD_DECL(H5Fcreate, hid_t, (const char *filename, unsigned flags, hid_t create_plist, hid_t access_plist));
 DARSHAN_FORWARD_DECL(H5Fopen, hid_t, (const char *filename, unsigned flags, hid_t access_plist));

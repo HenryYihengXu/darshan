@@ -19,6 +19,10 @@
 #include "darshan-core.h"
 #include "darshan-dynamic.h"
 
+#ifdef DARSHAN_GOTCHA
+#include gotcha-map-darshan-list.h
+#endif
+
 #ifndef DARSHAN_GOTCHA
 #ifdef HAVE_MPI
 DARSHAN_FORWARD_DECL(PMPI_Finalize, int, ());

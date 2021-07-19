@@ -21,6 +21,10 @@
 #include "darshan.h"
 #include "darshan-dynamic.h"
 
+#ifdef DARSHAN_GOTCHA
+#include gotcha-map-darshan-list.h
+#endif
+
 #define RECORD_STRING "total-mdhim-obj-stats"
 
 /* The DARSHAN_FORWARD_DECL macro (defined in darshan.h) is used to provide forward
