@@ -7,6 +7,10 @@
 #ifndef __DARSHAN_DYNAMIC_H
 #define __DARSHAN_DYNAMIC_H
 
+#ifdef HAVE_MPI
+#include <mpi.h>
+#endif
+
 #ifdef DARSHAN_PRELOAD
 
 #define DARSHAN_EXTERN_DECL(name,ret,args) \

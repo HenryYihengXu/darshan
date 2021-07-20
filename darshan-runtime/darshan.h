@@ -60,6 +60,8 @@
 #elif DARSHAN_GOTCHA
 
 #include <gotcha/gotcha.h>
+#include <dlfcn.h>
+#include <stdlib.h>
 
 #define DARSHAN_REAL_CALL(__func) __darshan_real_ ## __func
 
