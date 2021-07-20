@@ -177,6 +177,8 @@ extern char *darshan_posix_lookup_record_name(int fd);
 /* we need access to fileno (defined in POSIX module) for instrumenting fopen calls */
 #ifdef DARSHAN_PRELOAD
 extern int (*DARSHAN_REAL_CALL(fileno))(FILE *stream);
+#elif DARSHAN_GOTCHA
+extern int (*DARSHAN_REAL_CALL(fileno))(FILE *stream);
 #else
 extern int DARSHAN_REAL_CALL(fileno)(FILE *stream);
 #endif
