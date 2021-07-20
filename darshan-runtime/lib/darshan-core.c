@@ -2454,9 +2454,11 @@ static double darshan_core_wtime_absolute(void)
 }
 
 #ifdef DARSHAN_PRELOAD
-extern int (*__real_vfprintf)(FILE *stream, const char *format, va_list);
+extern int (*DARSHAN_REAL_CALL(vfprintf))(FILE *stream, const char *format, va_list);
+#elif DARSHAN_GOTCHA
+extern int (*DARSHAN_REAL_CALL(vfprintf))(FILE *stream, const char *format, va_list);
 #else
-extern int __real_vfprintf(FILE *stream, const char *format, va_list);
+extern int DARSHAN_REAL_CALL(vfprintf)(FILE *stream, const char *format, va_list);
 #endif
 void darshan_core_fprintf(
     FILE *stream, const char *format, ...)
@@ -2466,7 +2468,7 @@ void darshan_core_fprintf(
     MAP_OR_FAIL(vfprintf);
 
     va_start(ap, format);
-    __real_vfprintf(stream, format, ap);
+    DARSHAN_REAL_CALL(vfprintf)(stream, format, ap);
     va_end(ap);
 
     return;
