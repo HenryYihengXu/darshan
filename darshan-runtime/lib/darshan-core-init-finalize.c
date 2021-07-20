@@ -125,17 +125,24 @@ DARSHAN_FORWARD_DECL(MPI_Finalize, int, ());
 DARSHAN_FORWARD_DECL(MPI_Init, int, (int *argc, char ***argv));
 DARSHAN_FORWARD_DECL(MPI_Init_thread, int, (int *argc, char ***argv, int required, int *provided));
 
-int DARSHAN_DECL(MPI_Init)(int *argc, char ***argv)
+int MPI_Init(int *argc, char ***argv)
 {
     int ret;
 
-    MAP_OR_FAIL(MPI_Init);
+    // MAP_OR_FAIL(MPI_Init);
+    if (!(__darshan_real_MPI_Init)) {
+        __darshan_real_MPI_Init = dlsym(RTLD_NEXT, "MPI_Init");
+        if (!(__darshan_real_MPI_Init)) { 
+            printf("Darshan failed to map symbol: %s\n", "MPI_Init"); 
+        }
+    }
 
     ret = DARSHAN_REAL_CALL(MPI_Init)(argc, argv);
     if(ret != MPI_SUCCESS)
     {
         return(ret);
     }
+    setup_recorder_gotcha_wrappers(PRIORITY);
 
     if(argc && argv)
     {
@@ -147,8 +154,6 @@ int DARSHAN_DECL(MPI_Init)(int *argc, char ***argv)
         darshan_core_initialize(0, NULL);
     }
     int priority = 3;
-    setup_darshan_gotcha_wrappers(priority);
-
     return(ret);
 }
 
