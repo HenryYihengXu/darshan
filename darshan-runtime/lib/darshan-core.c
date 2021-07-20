@@ -44,6 +44,10 @@
 #include <lustre/lustre_user.h>
 #endif
 
+#ifdef DARSHAN_GOTCHA
+#include "gotcha-map-darshan-list.h"
+#endif
+
 extern char* __progname;
 extern char* __progname_full;
 
