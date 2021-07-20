@@ -142,7 +142,7 @@ int MPI_Init(int *argc, char ***argv)
     {
         return(ret);
     }
-    setup_recorder_gotcha_wrappers(PRIORITY);
+    setup_darshan_gotcha_wrappers(PRIORITY);
 
     if(argc && argv)
     {
