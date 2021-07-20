@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "typeinfo": "c"
+        "typeinfo": "c",
+        "darshan-mdhim.h": "c"
     }
 }

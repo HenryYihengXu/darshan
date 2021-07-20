@@ -8,9 +8,12 @@
 #include "darshan-mpiio.h"
 #include "darshan-core-init-finalize.h"
 #include "darshan-hdf5.h"
-#include "darshan-mdhim.h"
 #include "darshan-null.h"
 #include "darshan-pnetcdf.h"
+
+#ifdef BUILD_MDHIM_MODULE
+#include "darshan-mdhim.h"
+#endif
 
 struct gotcha_binding_t darshan_wrappers[] = {
     /* posix */
@@ -164,10 +167,12 @@ struct gotcha_binding_t darshan_wrappers[] = {
 #endif
     { "H5Dclose", DARSHAN_DECL(H5Dclose), &DARSHAN_WRAPPEE_HANDLE(H5Dclose) },
     
+#ifdef BUILD_MDHIM_MODULE
     /* mdhim */
     { "mdhimPut", DARSHAN_DECL(mdhimPut), &DARSHAN_WRAPPEE_HANDLE(mdhimPut) },
     { "mdhimGet", DARSHAN_DECL(mdhimGet), &DARSHAN_WRAPPEE_HANDLE(mdhimGet) },
     { "mdhimInit", DARSHAN_DECL(mdhimInit), &DARSHAN_WRAPPEE_HANDLE(mdhimInit) },
+#endif
 
     /* null */
     { "foo", DARSHAN_DECL(foo), &DARSHAN_WRAPPEE_HANDLE(foo) },
