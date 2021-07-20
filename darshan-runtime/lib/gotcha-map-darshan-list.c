@@ -1,4 +1,6 @@
 #ifdef DARSHAN_GOTCHA
+#include <stdio.h>
+#include <stdlib.h>
 #include "darshan.h"
 #include "gotcha-map-darshan-list.h"
 #include "darshan-posix.h"
