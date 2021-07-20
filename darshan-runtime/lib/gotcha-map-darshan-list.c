@@ -109,6 +109,7 @@ struct gotcha_binding_t darshan_wrappers[] = {
     { "fsetpos", DARSHAN_DECL(fsetpos), &DARSHAN_WRAPPEE_HANDLE(fsetpos) },
     { "fsetpos64", DARSHAN_DECL(fsetpos64), &DARSHAN_WRAPPEE_HANDLE(fsetpos64) },
     { "rewind", DARSHAN_DECL(rewind), &DARSHAN_WRAPPEE_HANDLE(rewind) },
+    // fileno and vfprintf defined in the middle of darshan-stdio.c and darshan-core.c. But already in here.
     
     /* mpiio */
     { "MPI_File_close", DARSHAN_DECL(MPI_File_close), &DARSHAN_WRAPPEE_HANDLE(MPI_File_close) },
