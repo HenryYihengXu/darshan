@@ -102,7 +102,17 @@ H_SRCS = darshan-common.h \
          darshan-dxt.h \
          uthash.h \
          darshan-dynamic.h \
-         utlist.h
+         utlist.h \
+         \
+         darshan-core-init-finalize.h \
+         darshan-hdf5.h \
+         darshan-mdhim.h \
+         darshan-mpiio.h \
+         darshan-null.h \
+         darshan-pnetcdf.h \
+         darshan-posix.h \
+         darshan-stdio.h \
+         gotcha-map-darshan-list.h
 
 EXTRA_DIST = $(H_SRCS) \
              darshan-null.c \
@@ -114,5 +124,7 @@ EXTRA_DIST = $(H_SRCS) \
              darshan-hdf5.c \
              darshan-bgq.c \
              darshan-lustre.c \
-             darshan-mdhim.c
+             darshan-mdhim.c \
+             \
+             gotcha-map-darshan-list.c
 
