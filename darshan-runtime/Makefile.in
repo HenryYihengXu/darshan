@@ -30,7 +30,7 @@ VPATH = $(srcdir)
 
 CFLAGS = -DDARSHAN_CONFIG_H=\"darshan-runtime-config.h\" -I . -I ../ -I $(srcdir) -I$(srcdir)/../ @CFLAGS@ @CPPFLAGS@ -D_LARGEFILE64_SOURCE
 
-CFLAGS_SHARED = -DDARSHAN_CONFIG_H=\"darshan-runtime-config.h\" -I . -I$(srcdir) -I$(srcdir)/../ @CFLAGS@ @CPPFLAGS@ -D_LARGEFILE64_SOURCE -shared -fpic -DPIC -DDARSHAN_GOTCHA -DPRIORITY=3
+CFLAGS_SHARED = -DDARSHAN_CONFIG_H=\"darshan-runtime-config.h\" -I . -I$(srcdir) -I$(srcdir)/../ @CFLAGS@ @CPPFLAGS@ -D_LARGEFILE64_SOURCE -shared -fpic -DPIC -DDARSHAN_GOTCHA -DPRIORITY=3 -DHAVE_PREADV -DHAVE_PWRITEV
 
 LIBS = -lpthread -lrt -lz -ldl -lgotcha @DARSHAN_LUSTRE_LD_FLAGS@
 
@@ -213,7 +213,7 @@ lib/lookup8.o: lib/lookup8.c
 lib/lookup8.po: lib/lookup8.c
 	$(CC) $(CFLAGS_SHARED) -c $< -o $@
 
-lib/libdarshan.a: lib/darshan-core-init-finalize.o lib/darshan-core.o lib/darshan-common.o $(DARSHAN_STATIC_MOD_OBJS) lib/lookup3.o lib/lookup8.o
+lib/libdarshan.a: lib/darshan-core-init-finalize.o lib/darshan-core.o lib/darshan-common.o lib/gotcha-map-darshan-list.o $(DARSHAN_STATIC_MOD_OBJS) lib/lookup3.o lib/lookup8.o
 	ar rcs $@ $^
 
 lib/libdarshan.so: lib/darshan-core-init-finalize.po lib/darshan-core.po lib/darshan-common.po lib/gotcha-map-darshan-list.po $(DARSHAN_DYNAMIC_MOD_OBJS) lib/lookup3.po lib/lookup8.po
