@@ -30,7 +30,7 @@ VPATH = $(srcdir)
 
 CFLAGS = -DDARSHAN_CONFIG_H=\"darshan-runtime-config.h\" -I . -I ../ -I $(srcdir) -I$(srcdir)/../ @CFLAGS@ @CPPFLAGS@ -D_LARGEFILE64_SOURCE
 
-CFLAGS_SHARED = -DDARSHAN_CONFIG_H=\"darshan-runtime-config.h\" -I . -I$(srcdir) -I$(srcdir)/../ @CFLAGS@ @CPPFLAGS@ -D_LARGEFILE64_SOURCE -shared -fpic -DPIC -DDARSHAN_GOTCHA -DPRIORITY=3 -DHAVE_PREADV -DHAVE_PWRITEV
+CFLAGS_SHARED = -DDARSHAN_CONFIG_H=\"darshan-runtime-config.h\" -I . -I$(srcdir) -I$(srcdir)/../ @CFLAGS@ @CPPFLAGS@ -D_LARGEFILE64_SOURCE -shared -fpic -DPIC -DDARSHAN_GOTCHA -DPRIORITY=3
 
 LIBS = -lpthread -lrt -lz -ldl -lgotcha @DARSHAN_LUSTRE_LD_FLAGS@
 

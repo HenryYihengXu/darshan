@@ -1,4 +1,5 @@
 #ifdef DARSHAN_GOTCHA
+#include "darshan-runtime-config.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include "darshan.h"

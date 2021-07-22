@@ -1,6 +1,7 @@
 #ifdef DARSHAN_GOTCHA
 #include "gotcha/gotcha_types.h"
 #include "gotcha/gotcha.h"
+#include "darshan-runtime-config.h"
 
 /* define gotcha-specific state to use with our wrapper */
 #define DARSHAN_WRAPPEE_HANDLE_DECL(func) \
