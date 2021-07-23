@@ -570,18 +570,24 @@ void darshan_core_shutdown(int write_log)
     if(orig_parent_pid)
     {
         /* set fork metadata */
+    fprintf(stderr, "\n\n 6.1 \n\n");
         meta_remain = DARSHAN_JOB_METADATA_LEN -
             strlen(final_core->log_job_p->metadata) - 1;
+    fprintf(stderr, "\n\n 6.2 \n\n");
         if(meta_remain >= 18) // 18 bytes enough for meta string + max PID (5 chars)
         {
+    fprintf(stderr, "\n\n 6.3 \n\n");
             m = final_core->log_job_p->metadata +
                 strlen(final_core->log_job_p->metadata);
+    fprintf(stderr, "\n\n 6.4 \n\n");
             sprintf(m, "fork_parent=%d\n", parent_pid);
         }
     }
 
     /* get the log file name */
+    fprintf(stderr, "\n\n 6.5 \n\n");
     darshan_get_logfile_name(logfile_name, final_core);
+    fprintf(stderr, "\n\n 6.6 \n\n");
     if(strlen(logfile_name) == 0)
     {
         /* failed to generate log file name */
