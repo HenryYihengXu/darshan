@@ -17,6 +17,8 @@
 #endif
 
 struct gotcha_binding_t darshan_wrappers[] = {
+    
+#ifdef BUILD_POSIX_MODULE
     /* posix */
     { "open", DARSHAN_DECL(open), &DARSHAN_WRAPPEE_HANDLE(open) },
     { "open64", DARSHAN_DECL(open64), &DARSHAN_WRAPPEE_HANDLE(open64) },
@@ -81,7 +83,9 @@ struct gotcha_binding_t darshan_wrappers[] = {
     { "lio_listio", DARSHAN_DECL(lio_listio), &DARSHAN_WRAPPEE_HANDLE(lio_listio) },
     { "lio_listio64", DARSHAN_DECL(lio_listio64), &DARSHAN_WRAPPEE_HANDLE(lio_listio64) },
     { "rename", DARSHAN_DECL(rename), &DARSHAN_WRAPPEE_HANDLE(rename) },
-    
+#endif
+
+#ifdef BUILD_STDIO_MODULE    
     /* stdio */
     { "fopen", DARSHAN_DECL(fopen), &DARSHAN_WRAPPEE_HANDLE(fopen) },
     { "fopen64", DARSHAN_DECL(fopen64), &DARSHAN_WRAPPEE_HANDLE(fopen64) },
@@ -116,7 +120,9 @@ struct gotcha_binding_t darshan_wrappers[] = {
     { "fsetpos64", DARSHAN_DECL(fsetpos64), &DARSHAN_WRAPPEE_HANDLE(fsetpos64) },
     { "rewind", DARSHAN_DECL(rewind), &DARSHAN_WRAPPEE_HANDLE(rewind) },
     // fileno and vfprintf defined in the middle of darshan-stdio.c and darshan-core.c. But already in here.
-    
+#endif
+
+#ifdef BUILD_MPIIO_MODULE    
     /* mpiio */
     { "MPI_File_close", DARSHAN_DECL(MPI_File_close), &DARSHAN_WRAPPEE_HANDLE(MPI_File_close) },
     { "MPI_File_iread_at", DARSHAN_DECL(MPI_File_iread_at), &DARSHAN_WRAPPEE_HANDLE(MPI_File_iread_at) },
@@ -146,14 +152,16 @@ struct gotcha_binding_t darshan_wrappers[] = {
     { "MPI_File_write_ordered_begin", DARSHAN_DECL(MPI_File_write_ordered_begin), &DARSHAN_WRAPPEE_HANDLE(MPI_File_write_ordered_begin) },
     { "MPI_File_write_ordered", DARSHAN_DECL(MPI_File_write_ordered), &DARSHAN_WRAPPEE_HANDLE(MPI_File_write_ordered) },
     { "MPI_File_write_shared", DARSHAN_DECL(MPI_File_write_shared), &DARSHAN_WRAPPEE_HANDLE(MPI_File_write_shared) },
-    
+
     /* core-init-finalize */
 #ifdef WITH_INIT_FINI
     { "MPI_Init", DARSHAN_DECL(MPI_Init), &DARSHAN_WRAPPEE_HANDLE(MPI_Init) },
     { "MPI_Init_thread", DARSHAN_DECL(MPI_Init_thread), &DARSHAN_WRAPPEE_HANDLE(MPI_Init_thread) },
 #endif
     { "MPI_Finalize", DARSHAN_DECL(MPI_Finalize), &DARSHAN_WRAPPEE_HANDLE(MPI_Finalize) },
+#endif
 
+#ifdef BUILD_HDF5_MODULE
     /* hdf5 */
     { "H5Fcreate", DARSHAN_DECL(H5Fcreate), &DARSHAN_WRAPPEE_HANDLE(H5Fcreate) },
     { "H5Fopen", DARSHAN_DECL(H5Fopen), &DARSHAN_WRAPPEE_HANDLE(H5Fopen) },
@@ -169,7 +177,8 @@ struct gotcha_binding_t darshan_wrappers[] = {
     { "H5Dflush", DARSHAN_DECL(H5Dflush), &DARSHAN_WRAPPEE_HANDLE(H5Dflush) },
 #endif
     { "H5Dclose", DARSHAN_DECL(H5Dclose), &DARSHAN_WRAPPEE_HANDLE(H5Dclose) },
-    
+#endif
+
 #ifdef BUILD_MDHIM_MODULE
     /* mdhim */
     { "mdhimPut", DARSHAN_DECL(mdhimPut), &DARSHAN_WRAPPEE_HANDLE(mdhimPut) },
@@ -177,14 +186,18 @@ struct gotcha_binding_t darshan_wrappers[] = {
     { "mdhimInit", DARSHAN_DECL(mdhimInit), &DARSHAN_WRAPPEE_HANDLE(mdhimInit) },
 #endif
 
+#ifdef BUILD_NULL_MODULE
     /* null */
     { "foo", DARSHAN_DECL(foo), &DARSHAN_WRAPPEE_HANDLE(foo) },
-    
+#endif
+
+#ifdef BUILD_PNETCDF_MODULE
     /* pnetcdf */
     { "ncmpi_create", DARSHAN_DECL(ncmpi_create), &DARSHAN_WRAPPEE_HANDLE(ncmpi_create) },
     { "ncmpi_open", DARSHAN_DECL(ncmpi_open), &DARSHAN_WRAPPEE_HANDLE(ncmpi_open) },
     { "ncmpi_close", DARSHAN_DECL(ncmpi_close), &DARSHAN_WRAPPEE_HANDLE(ncmpi_close) },
-    
+#endif
+
 };
 
 #define GOTCHA_NFUNCS (sizeof(darshan_wrappers) / sizeof(gotcha_binding_t))
