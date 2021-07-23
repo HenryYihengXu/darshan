@@ -17,9 +17,10 @@
 
 #ifdef HAVE_MPI
 int DARSHAN_DECL(MPI_Finalize)();
+#ifdef WITH_INIT_FINI
 int DARSHAN_DECL(MPI_Init)(int *argc, char ***argv);
 int DARSHAN_DECL(MPI_Init_thread)(int *argc, char ***argv, int required, int *provided);
-
+#endif
 #endif
 
 #endif /* DARSHAN_GOTCHA */

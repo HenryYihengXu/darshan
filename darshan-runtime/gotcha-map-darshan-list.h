@@ -140,8 +140,10 @@ DARSHAN_WRAPPEE_HANDLE_DECL(MPI_File_write_ordered);
 DARSHAN_WRAPPEE_HANDLE_DECL(MPI_File_write_shared);
 
 /* core-init-finalize */
+#ifdef WITH_INIT_FINI
 DARSHAN_WRAPPEE_HANDLE_DECL(MPI_Init);
 DARSHAN_WRAPPEE_HANDLE_DECL(MPI_Init_thread);
+#endif
 DARSHAN_WRAPPEE_HANDLE_DECL(MPI_Finalize);
 
 /* hdf5 */

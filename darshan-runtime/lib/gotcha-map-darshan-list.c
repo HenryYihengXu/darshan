@@ -148,8 +148,10 @@ struct gotcha_binding_t darshan_wrappers[] = {
     { "MPI_File_write_shared", DARSHAN_DECL(MPI_File_write_shared), &DARSHAN_WRAPPEE_HANDLE(MPI_File_write_shared) },
     
     /* core-init-finalize */
+#ifdef WITH_INIT_FINI
     { "MPI_Init", DARSHAN_DECL(MPI_Init), &DARSHAN_WRAPPEE_HANDLE(MPI_Init) },
     { "MPI_Init_thread", DARSHAN_DECL(MPI_Init_thread), &DARSHAN_WRAPPEE_HANDLE(MPI_Init_thread) },
+#endif
     { "MPI_Finalize", DARSHAN_DECL(MPI_Finalize), &DARSHAN_WRAPPEE_HANDLE(MPI_Finalize) },
 
     /* hdf5 */
