@@ -442,7 +442,7 @@ int DARSHAN_DECL(fclose)(FILE *fp)
 
 size_t DARSHAN_DECL(fwrite)(const void *ptr, size_t size, size_t nmemb, FILE *stream)
 {
-    fprintf(stderr, "\n\nIn darshan fread gotcha wrapper\n\n");
+    printf("\n\nIn darshan write gotcha wrapper\n\n");
     size_t ret;
     double tm1, tm2;
 
