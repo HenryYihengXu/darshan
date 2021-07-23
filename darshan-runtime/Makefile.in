@@ -30,9 +30,11 @@ VPATH = $(srcdir)
 
 CFLAGS = -DDARSHAN_CONFIG_H=\"darshan-runtime-config.h\" -I . -I ../ -I $(srcdir) -I$(srcdir)/../ @CFLAGS@ @CPPFLAGS@ -D_LARGEFILE64_SOURCE
 
-CFLAGS_SHARED = -DDARSHAN_CONFIG_H=\"darshan-runtime-config.h\" -I . -I$(srcdir) -I$(srcdir)/../ @CFLAGS@ @CPPFLAGS@ -D_LARGEFILE64_SOURCE -shared -fpic -DPIC -DDARSHAN_GOTCHA -DPRIORITY=3 -DBUILD_POSIX_MODULE=$BUILD_POSIX_MODULE
+CFLAGS_SHARED = -DDARSHAN_CONFIG_H=\"darshan-runtime-config.h\" -I . -I$(srcdir) -I$(srcdir)/../ @CFLAGS@ @CPPFLAGS@ -D_LARGEFILE64_SOURCE -shared -fpic -DPIC -DDARSHAN_GOTCHA -DPRIORITY=3
 
 LIBS = -lpthread -lrt -lz -ldl -lgotcha @DARSHAN_LUSTRE_LD_FLAGS@
+
+BUILD_MODULES=
 
 BUILD_NULL_MODULE = @BUILD_NULL_MODULE@
 BUILD_POSIX_MODULE = @BUILD_POSIX_MODULE@
@@ -53,36 +55,43 @@ DARSHAN_DYNAMIC_MOD_OBJS =
 ifdef BUILD_NULL_MODULE
 DARSHAN_STATIC_MOD_OBJS += lib/darshan-null.o
 DARSHAN_DYNAMIC_MOD_OBJS += lib/darshan-null.po
+BUILD_MODULES += -DBUILD_NULL_MODULE
 endif
 
 ifdef BUILD_POSIX_MODULE
 DARSHAN_STATIC_MOD_OBJS += lib/darshan-posix.o
 DARSHAN_DYNAMIC_MOD_OBJS += lib/darshan-posix.po
+BUILD_MODULES += -DBUILD_POSIX_MODULE
 endif
 
 ifdef BUILD_STDIO_MODULE
 DARSHAN_STATIC_MOD_OBJS += lib/darshan-stdio.o
 DARSHAN_DYNAMIC_MOD_OBJS += lib/darshan-stdio.po
+BUILD_MODULES += -DBUILD_STDIO_MODULE
 endif
 
 ifdef BUILD_DXT_MODULE
 DARSHAN_STATIC_MOD_OBJS += lib/darshan-dxt.o
 DARSHAN_DYNAMIC_MOD_OBJS += lib/darshan-dxt.po
+BUILD_MODULES += -DBUILD_DXT_MODULE
 endif
 
 ifdef BUILD_MPIIO_MODULE
 DARSHAN_STATIC_MOD_OBJS += lib/darshan-mpiio.o
 DARSHAN_DYNAMIC_MOD_OBJS += lib/darshan-mpiio.po
+BUILD_MODULES += -DBUILD_MPIIO_MODULE
 endif
 
 ifdef BUILD_PNETCDF_MODULE
 DARSHAN_STATIC_MOD_OBJS += lib/darshan-pnetcdf.o
 DARSHAN_DYNAMIC_MOD_OBJS += lib/darshan-pnetcdf.po
+BUILD_MODULES += -DBUILD_PNETCDF_MODULE
 endif
 
 ifdef BUILD_HDF5_MODULE
 DARSHAN_STATIC_MOD_OBJS += lib/darshan-hdf5.o
 DARSHAN_DYNAMIC_MOD_OBJS += lib/darshan-hdf5.po
+BUILD_MODULES += -DBUILD_HDF5_MODULE
 endif
 
 ifdef BUILD_BGQ_MODULE
@@ -90,6 +99,7 @@ DARSHAN_STATIC_MOD_OBJS += lib/darshan-bgq.o
 DARSHAN_DYNAMIC_MOD_OBJS += lib/darshan-bgq.po
 CFLAGS += -DDARSHAN_BGQ
 CFLAGS_SHARED += -DDARSHAN_BGQ
+BUILD_MODULES += -DBUILD_BGQ_MODULE
 endif
 
 ifdef BUILD_LUSTRE_MODULE
@@ -97,6 +107,7 @@ DARSHAN_STATIC_MOD_OBJS += lib/darshan-lustre.o
 DARSHAN_DYNAMIC_MOD_OBJS += lib/darshan-lustre.po
 CFLAGS += -DDARSHAN_LUSTRE
 CFLAGS_SHARED += -DDARSHAN_LUSTRE
+BUILD_MODULES += -DBUILD_LUSTRE_MODULE
 endif
 
 ifdef BUILD_MDHIM_MODULE
@@ -104,14 +115,19 @@ DARSHAN_STATIC_MOD_OBJS += lib/darshan-mdhim.o
 DARSHAN_DYNAMIC_MOD_OBJS += lib/darshan-mdhim.po
 CFLAGS += -DDARSHAN_MDHIM
 CFLAGS_SHARED += -DDARSHAN_MDHIM
+BUILD_MODULES += -DBUILD_MDHIM_MODULE
 endif
 
 ifdef BUILD_APXC_MODULE
 include $(srcdir)/../modules/autoperf/apxc/Makefile.darshan
+BUILD_MODULES += -DBUILD_APXC_MODULE
 endif
 ifdef BUILD_APMPI_MODULE
 include $(srcdir)/../modules/autoperf/apmpi/Makefile.darshan
+BUILD_MODULES += -DBUILD_APMPI_MODULE
 endif
+
+CFLAGS_SHARED += $(BUILD_MODULES)
 
 lib::
 	@mkdir -p $@
