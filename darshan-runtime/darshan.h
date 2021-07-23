@@ -74,14 +74,11 @@
     __ret __darshan_gotcha_wrap_ ## __func __args __attribute__ ((alias ("__darshan_gotcha_wrap_" #__fcall)));
 
 #define MAP_OR_FAIL(__func) \
-    if (!(__darshan_real_ ## __func)) \
-    { \
         __darshan_real_ ## __func = gotcha_get_wrappee(darshan_wrappee_handle_ ## __func); \
         if(!(__darshan_real_ ## __func)) { \
             darshan_core_fprintf(stderr, "Darshan failed to map symbol: %s\n", #__func); \
             exit(1); \
-       } \
-    }
+       }
 
 #else
 
