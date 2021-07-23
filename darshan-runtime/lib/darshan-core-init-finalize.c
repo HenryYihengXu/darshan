@@ -133,6 +133,7 @@ int DARSHAN_DECL(MPI_Finalize)(void)
     MAP_OR_FAIL(MPI_Finalize);
 
     darshan_core_shutdown(1);
+    fprintf(stderr, "\n\nright after darshan_core_shutdown\n\n");
 
     ret = DARSHAN_REAL_CALL(MPI_Finalize)();
     return(ret);
@@ -164,13 +165,13 @@ int MPI_Init(int *argc, char ***argv)
     if(argc && argv)
     {
         darshan_core_initialize(*argc, *argv);
+        fprintf(stderr, "\n\nright after darshan_core_initialize\n\n");
     }
     else
     {
         /* we don't see argc and argv here in fortran */
         darshan_core_initialize(0, NULL);
     }
-    int priority = 3;
     return(ret);
 }
 
