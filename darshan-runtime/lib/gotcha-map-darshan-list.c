@@ -20,7 +20,7 @@ struct gotcha_binding_t darshan_wrappers[] = {
 
 #ifdef BUILD_POSIX_MODULE
     /* posix */
-    { "open", DARSHAN_DECL(open), &DARSHAN_WRAPPEE_HANDLE(open) },
+    //{ "open", DARSHAN_DECL(open), &DARSHAN_WRAPPEE_HANDLE(open) },
     { "open64", DARSHAN_DECL(open64), &DARSHAN_WRAPPEE_HANDLE(open64) },
     { "__open_2", DARSHAN_DECL(__open_2), &DARSHAN_WRAPPEE_HANDLE(__open_2) },
     { "openat", DARSHAN_DECL(openat), &DARSHAN_WRAPPEE_HANDLE(openat) },
