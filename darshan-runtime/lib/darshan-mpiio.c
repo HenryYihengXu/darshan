@@ -430,8 +430,6 @@ int DARSHAN_DECL(MPI_File_open)(MPI_Comm comm, const char *filename, int amode, 
 int DARSHAN_DECL(MPI_File_open)(MPI_Comm comm, char *filename, int amode, MPI_Info info, MPI_File *fh) 
 #endif
 {
-    fprintf(stderr, "\n\n In darshan MPI_File_open gotcha wrapper    ", filename);
-    fprintf(stderr, "filename = %s\n\n", filename);
     int ret;
     MPI_File tmp_fh;
     char* tmp;
@@ -1264,6 +1262,8 @@ int DARSHAN_DECL(MPI_File_open)(MPI_Comm comm, const char *filename, int amode, 
 int DARSHAN_DECL(MPI_File_open)(MPI_Comm comm, char *filename, int amode, MPI_Info info, MPI_File *fh) 
 #endif
 {
+    fprintf(stderr, "\n\n In darshan MPI_File_open gotcha wrapper    ", filename);
+    fprintf(stderr, "filename = %s\n\n", filename);
     int ret;
     MPI_File tmp_fh;
     char* tmp;
