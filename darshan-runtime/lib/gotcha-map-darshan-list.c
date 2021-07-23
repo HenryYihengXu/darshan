@@ -131,7 +131,7 @@ struct gotcha_binding_t darshan_wrappers[] = {
     { "MPI_File_iwrite_at", DARSHAN_DECL(MPI_File_iwrite_at), &DARSHAN_WRAPPEE_HANDLE(MPI_File_iwrite_at) },
     { "MPI_File_iwrite", DARSHAN_DECL(MPI_File_iwrite), &DARSHAN_WRAPPEE_HANDLE(MPI_File_iwrite) },
     { "MPI_File_iwrite_shared", DARSHAN_DECL(MPI_File_iwrite_shared), &DARSHAN_WRAPPEE_HANDLE(MPI_File_iwrite_shared) },
-    { "MPI_File_open", DARSHAN_DECL(MPI_File_open), &DARSHAN_WRAPPEE_HANDLE(MPI_File_open) },
+    //{ "MPI_File_open", DARSHAN_DECL(MPI_File_open), &DARSHAN_WRAPPEE_HANDLE(MPI_File_open) },
     { "MPI_File_read_all_begin", DARSHAN_DECL(MPI_File_read_all_begin), &DARSHAN_WRAPPEE_HANDLE(MPI_File_read_all_begin) },
     { "MPI_File_read_all", DARSHAN_DECL(MPI_File_read_all), &DARSHAN_WRAPPEE_HANDLE(MPI_File_read_all) },
     { "MPI_File_read_at_all", DARSHAN_DECL(MPI_File_read_at_all), &DARSHAN_WRAPPEE_HANDLE(MPI_File_read_at_all) },
