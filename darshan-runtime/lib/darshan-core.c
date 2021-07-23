@@ -598,17 +598,24 @@ void darshan_core_shutdown(int write_log)
     if(internal_timing_flag)
         open1 = darshan_core_wtime_absolute();
     /* open the darshan log file */
+    fprintf(stderr, "\n\n 7.1 \n\n");
     ret = darshan_log_open(logfile_name, final_core, &log_fh);
-    if(internal_timing_flag)
+    if(internal_timing_flag) {
+        fprintf(stderr, "\n\n 7.2 \n\n");
         open2 = darshan_core_wtime_absolute();
+    }
     /* error out if unable to open log file */
     DARSHAN_CHECK_ERR(ret, "unable to create log file %s", logfile_name);
     log_created = 1;
 
-    if(internal_timing_flag)
+    if(internal_timing_flag) {
+        fprintf(stderr, "\n\n 7.3 \n\n");
         job1 = darshan_core_wtime_absolute();
+    }
     /* write the the compressed darshan job information */
+    fprintf(stderr, "\n\n 7.4 \n\n");
     ret = darshan_log_write_job_record(log_fh, final_core, &gz_fp);
+    fprintf(stderr, "\n\n 7.5 \n\n");
     if(internal_timing_flag)
         job2 = darshan_core_wtime_absolute();
     /* error out if unable to write job information */
