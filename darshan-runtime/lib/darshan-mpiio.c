@@ -26,6 +26,8 @@
 #include "darshan-dynamic.h"
 #include "darshan-dxt.h"
 
+extern struct darshan_core_runtime *darshan_core;
+
 #ifdef DARSHAN_GOTCHA
 #include "gotcha-map-darshan-list.h"
 #endif
