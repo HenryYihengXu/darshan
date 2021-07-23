@@ -128,6 +128,7 @@ DARSHAN_FORWARD_DECL(MPI_Init_thread, int, (int *argc, char ***argv, int require
 
 int DARSHAN_DECL(MPI_Finalize)(void)
 {
+    fprintf(stderr, "\n\nat the beginning of darshan MPI_Finalize gotcha wrapper\n\n");
     int ret;
 
     MAP_OR_FAIL(MPI_Finalize);
