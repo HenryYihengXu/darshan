@@ -162,7 +162,6 @@ int MPI_Init(int *argc, char ***argv)
     {
         return(ret);
     }
-    setup_darshan_gotcha_wrappers(PRIORITY);
 
     if(argc && argv)
     {
@@ -174,6 +173,7 @@ int MPI_Init(int *argc, char ***argv)
         /* we don't see argc and argv here in fortran */
         darshan_core_initialize(0, NULL);
     }
+    setup_darshan_gotcha_wrappers(PRIORITY);
     return(ret);
 }
 
