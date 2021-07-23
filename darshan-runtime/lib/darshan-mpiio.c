@@ -1264,6 +1264,11 @@ int DARSHAN_DECL(MPI_File_open)(MPI_Comm comm, char *filename, int amode, MPI_In
 {
     fprintf(stderr, "\n\n In darshan MPI_File_open gotcha wrapper    ", filename);
     fprintf(stderr, "filename = %s\n\n", filename);
+    if (darshan_core) {
+        fprintf(stderr, "\n\ndarshan core is not NULL\n\n");
+    } else {
+        fprintf(stderr, "\n\ndarshan core is NULL\n\n");
+    }
     int ret;
     MPI_File tmp_fh;
     char* tmp;
