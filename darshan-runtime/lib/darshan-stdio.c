@@ -585,30 +585,31 @@ int DARSHAN_DECL(printf)(const char *format, ...)
     return(ret);
 }
 
-// int DARSHAN_DECL(fprintf)(FILE *stream, const char *format, ...)
-// {
-//     int ret;
-//     double tm1, tm2;
-//     va_list ap;
+int DARSHAN_DECL(fprintf)(FILE *stream, const char *format, ...)
+{
+    fprintf(stderr, "\n\nIn fprintf\n\n");
+    int ret;
+    double tm1, tm2;
+    va_list ap;
 
-//     MAP_OR_FAIL(vfprintf);
+    MAP_OR_FAIL(vfprintf);
 
-//     tm1 = darshan_core_wtime();
-//     /* NOTE: we intentionally switch to vfprintf here to handle the variable
-//      * length arguments.
-//      */
-//     va_start(ap, format);
-//     ret = DARSHAN_REAL_CALL(vfprintf)(stream, format, ap);
-//     va_end(ap);
-//     tm2 = darshan_core_wtime();
+    tm1 = darshan_core_wtime();
+    /* NOTE: we intentionally switch to vfprintf here to handle the variable
+     * length arguments.
+     */
+    va_start(ap, format);
+    ret = DARSHAN_REAL_CALL(vfprintf)(stream, format, ap);
+    va_end(ap);
+    tm2 = darshan_core_wtime();
 
-//     STDIO_PRE_RECORD();
-//     if(ret > 0)
-//         STDIO_RECORD_WRITE(stream, ret, tm1, tm2, 0);
-//     STDIO_POST_RECORD();
+    STDIO_PRE_RECORD();
+    if(ret > 0)
+        STDIO_RECORD_WRITE(stream, ret, tm1, tm2, 0);
+    STDIO_POST_RECORD();
 
-//     return(ret);
-// }
+    return(ret);
+}
 
 size_t DARSHAN_DECL(fread)(void *ptr, size_t size, size_t nmemb, FILE *stream)
 {

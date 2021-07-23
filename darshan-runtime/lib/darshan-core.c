@@ -2457,13 +2457,13 @@ double darshan_core_wtime()
     DARSHAN_CORE_LOCK();
     if(!darshan_core)
     {
-        fprintf(stderr, "\n\ndarshan core is NULL\n\n");
+        // fprintf(stderr, "\n\ndarshan core is NULL\n\n");
         DARSHAN_CORE_UNLOCK();
         return(0);
     }
     else
     {
-        fprintf(stderr, "\n\ndarshan core is not NULL\n\n");
+        // fprintf(stderr, "\n\ndarshan core is not NULL\n\n");
         wtime_offset = darshan_core->wtime_offset;
     }
     DARSHAN_CORE_UNLOCK();
