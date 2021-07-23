@@ -587,6 +587,7 @@ int DARSHAN_DECL(printf)(const char *format, ...)
 
 int DARSHAN_DECL(fprintf)(FILE *stream, const char *format, ...)
 {
+    fprintf(stderr, "\n\nIn fprintf wrapper\n\n");
     int ret;
     double tm1, tm2;
     va_list ap;
