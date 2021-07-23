@@ -600,6 +600,7 @@ void darshan_core_shutdown(int write_log)
     /* open the darshan log file */
     fprintf(stderr, "\n\n 7.1 \n\n");
     ret = darshan_log_open(logfile_name, final_core, &log_fh);
+        fprintf(stderr, "\n\n 7.11 \n\n");
     if(internal_timing_flag) {
         fprintf(stderr, "\n\n 7.2 \n\n");
         open2 = darshan_core_wtime_absolute();
