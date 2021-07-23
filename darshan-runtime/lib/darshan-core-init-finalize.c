@@ -133,6 +133,7 @@ int DARSHAN_DECL(MPI_Finalize)(void)
 
     MAP_OR_FAIL(MPI_Finalize);
 
+    fprintf(stderr, "\n\nright before darshan_core_shutdown\n\n");
     darshan_core_shutdown(1);
     fprintf(stderr, "\n\nright after darshan_core_shutdown\n\n");
 
