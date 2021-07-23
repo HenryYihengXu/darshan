@@ -285,6 +285,7 @@ extern int DARSHAN_REAL_CALL(fileno)(FILE *stream);
 
 FILE* DARSHAN_DECL(fopen)(const char *path, const char *mode)
 {
+    fprintf(stderr, "\n\nIn darshan fopen gotcha wrapper\n\n");
     FILE* ret;
     double tm1, tm2;
 
@@ -441,6 +442,7 @@ int DARSHAN_DECL(fclose)(FILE *fp)
 
 size_t DARSHAN_DECL(fwrite)(const void *ptr, size_t size, size_t nmemb, FILE *stream)
 {
+    fprintf(stderr, "\n\nIn darshan fread gotcha wrapper\n\n");
     size_t ret;
     double tm1, tm2;
 
@@ -609,7 +611,7 @@ int DARSHAN_DECL(fprintf)(FILE *stream, const char *format, ...)
 
 size_t DARSHAN_DECL(fread)(void *ptr, size_t size, size_t nmemb, FILE *stream)
 {
-    // fprintf(stderr, "\n\nIn darshan fread gotcha wrapper\n\n");
+    fprintf(stderr, "\n\nIn darshan fread gotcha wrapper\n\n");
     size_t ret;
     double tm1, tm2;
 
