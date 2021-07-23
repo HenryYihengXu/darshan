@@ -1630,12 +1630,12 @@ static int darshan_log_open(char *logfile_name, struct darshan_core_runtime *cor
         }
 
         /* open the darshan log file for writing using MPI */
-    fprintf(stderr, "7.112");
+    fprintf(stderr, "\n\n7.112\n\n");
         ret = MPI_File_open(core->mpi_comm, logfile_name,
             MPI_MODE_CREATE | MPI_MODE_WRONLY | MPI_MODE_EXCL, info, &log_fh->mpi_fh);
-    fprintf(stderr, "7.113");
+    fprintf(stderr, "\n\n7.113\n\n");
         MPI_Info_free(&info);
-    fprintf(stderr, "7.114");
+    fprintf(stderr, "\n\n7.114\n\n");
         if(ret != MPI_SUCCESS)
             return(-1);
         return(0);
@@ -1643,7 +1643,7 @@ static int darshan_log_open(char *logfile_name, struct darshan_core_runtime *cor
 #endif
 
     /* open the darshan log file for writing */
-    fprintf(stderr, "7.115");
+    fprintf(stderr, "\n\n7.115\n\n");
     log_fh->nompi_fd = open(logfile_name, O_CREAT | O_WRONLY | O_EXCL, S_IRUSR);
     if(log_fh->nompi_fd < 0)
         return(-1);
