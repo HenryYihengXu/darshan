@@ -128,14 +128,11 @@ DARSHAN_FORWARD_DECL(MPI_Init_thread, int, (int *argc, char ***argv, int require
 
 int DARSHAN_DECL(MPI_Finalize)(void)
 {
-    fprintf(stderr, "\n\nat the beginning of darshan MPI_Finalize gotcha wrapper\n\n");
     int ret;
 
     MAP_OR_FAIL(MPI_Finalize);
 
-    fprintf(stderr, "\n\nright before darshan_core_shutdown\n\n");
     darshan_core_shutdown(1);
-    fprintf(stderr, "\n\nright after darshan_core_shutdown\n\n");
 
     ret = DARSHAN_REAL_CALL(MPI_Finalize)();
     return(ret);
@@ -166,7 +163,6 @@ int MPI_Init(int *argc, char ***argv)
     if(argc && argv)
     {
         darshan_core_initialize(*argc, *argv);
-        fprintf(stderr, "\n\nright after darshan_core_initialize\n\n");
     }
     else
     {

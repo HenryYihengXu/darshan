@@ -204,41 +204,41 @@ struct gotcha_binding_t darshan_wrappers[] = {
 
 int setup_darshan_gotcha_wrappers(int priority)
 {
-    #ifdef BUILD_POSIX_MODULE
-    fprintf(stderr, "\n\nBUILD_POSIX_MODULE is defined \n\n");
-    #else
-    fprintf(stderr, "\n\nBUILD_POSIX_MODULE is not defined \n\n");
-    #endif
+    // #ifdef BUILD_POSIX_MODULE
+    // fprintf(stderr, "\n\nBUILD_POSIX_MODULE is defined \n\n");
+    // #else
+    // fprintf(stderr, "\n\nBUILD_POSIX_MODULE is not defined \n\n");
+    // #endif
 
-    #ifdef BUILD_STDIO_MODULE
-    fprintf(stderr, "\n\nBUILD_STDIO_MODULE is defined \n\n");
-    #else
-    fprintf(stderr, "\n\nBUILD_STDIO_MODULE is not defined \n\n");
-    #endif
+    // #ifdef BUILD_STDIO_MODULE
+    // fprintf(stderr, "\n\nBUILD_STDIO_MODULE is defined \n\n");
+    // #else
+    // fprintf(stderr, "\n\nBUILD_STDIO_MODULE is not defined \n\n");
+    // #endif
 
-    #ifdef BUILD_MPIIO_MODULE
-    fprintf(stderr, "\n\nBUILD_MPIIO_MODULE is defined \n\n");
-    #else
-    fprintf(stderr, "\n\nBUILD_MPIIO_MODULE is not defined \n\n");
-    #endif
+    // #ifdef BUILD_MPIIO_MODULE
+    // fprintf(stderr, "\n\nBUILD_MPIIO_MODULE is defined \n\n");
+    // #else
+    // fprintf(stderr, "\n\nBUILD_MPIIO_MODULE is not defined \n\n");
+    // #endif
 
-    #ifdef BUILD_PNETCDF_MODULE
-    fprintf(stderr, "\n\nBUILD_PNETCDF_MODULE is defined \n\n");
-    #else
-    fprintf(stderr, "\n\nBUILD_PNETCDF_MODULE is not defined \n\n");
-    #endif
+    // #ifdef BUILD_PNETCDF_MODULE
+    // fprintf(stderr, "\n\nBUILD_PNETCDF_MODULE is defined \n\n");
+    // #else
+    // fprintf(stderr, "\n\nBUILD_PNETCDF_MODULE is not defined \n\n");
+    // #endif
 
-    #ifdef BUILD_HDF5_MODULE
-    fprintf(stderr, "\n\nBUILD_HDF5_MODULE is defined \n\n");
-    #else
-    fprintf(stderr, "\n\nBUILD_HDF5_MODULE is not defined \n\n");
-    #endif
+    // #ifdef BUILD_HDF5_MODULE
+    // fprintf(stderr, "\n\nBUILD_HDF5_MODULE is defined \n\n");
+    // #else
+    // fprintf(stderr, "\n\nBUILD_HDF5_MODULE is not defined \n\n");
+    // #endif
     
-    #ifdef BUILD_MDHIM_MODULE
-    fprintf(stderr, "\n\nBUILD_MDHIM_MODULE is defined \n\n");
-    #else
-    fprintf(stderr, "\n\nBUILD_MDHIM_MODULE is not defined \n\n");
-    #endif
+    // #ifdef BUILD_MDHIM_MODULE
+    // fprintf(stderr, "\n\nBUILD_MDHIM_MODULE is defined \n\n");
+    // #else
+    // fprintf(stderr, "\n\nBUILD_MDHIM_MODULE is not defined \n\n");
+    // #endif
 
     /* insert our I/O wrappers using gotcha */
     fprintf(stderr, "darshan setup gotcha wrappers with priority = %d\n", priority);

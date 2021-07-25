@@ -1261,14 +1261,6 @@ int DARSHAN_DECL(MPI_File_open)(MPI_Comm comm, const char *filename, int amode, 
 #else
 int DARSHAN_DECL(MPI_File_open)(MPI_Comm comm, char *filename, int amode, MPI_Info info, MPI_File *fh) 
 #endif
-{
-    fprintf(stderr, "\n\n In darshan MPI_File_open gotcha wrapper    ", filename);
-    fprintf(stderr, "filename = %s\n\n", filename);
-    // if (darshan_core) {
-    //     fprintf(stderr, "\n\ndarshan core is not NULL\n\n");
-    // } else {
-    //     fprintf(stderr, "\n\ndarshan core is NULL\n\n");
-    // }
     int ret;
     MPI_File tmp_fh;
     char* tmp;
@@ -1277,11 +1269,8 @@ int DARSHAN_DECL(MPI_File_open)(MPI_Comm comm, char *filename, int amode, MPI_In
     MAP_OR_FAIL(MPI_File_open);
 
     tm1 = darshan_core_wtime();
-    fprintf(stderr, "\n\n tm1 = %f\n\n", tm1);
     ret = DARSHAN_REAL_CALL(MPI_File_open)(comm, filename, amode, info, fh);
     tm2 = darshan_core_wtime();
-    fprintf(stderr, "\n\n tm2 = %f\n\n", tm2);
-
 
     /* use ROMIO approach to strip prefix if present */
     /* strip off prefix if there is one, but only skip prefixes

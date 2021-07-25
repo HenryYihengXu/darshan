@@ -442,7 +442,6 @@ void darshan_core_initialize(int argc, char **argv)
 
 void darshan_core_shutdown(int write_log)
 {
-    fprintf(stderr, "\n\n 1 \n\n");
     struct darshan_core_runtime *final_core;
     double start_log_time;
     int internal_timing_flag = 0;
@@ -469,7 +468,6 @@ void darshan_core_shutdown(int write_log)
 #endif
 
     /* disable darhan-core while we shutdown */
-    fprintf(stderr, "\n\n 2 \n\n");
     DARSHAN_CORE_LOCK();
     if(!darshan_core)
     {
@@ -492,7 +490,6 @@ void darshan_core_shutdown(int write_log)
      */
 
     /* grab some initial timing information */
-    fprintf(stderr, "\n\n 3 \n\n");
 #ifdef HAVE_MPI
     /* if using mpi, sync across procs first */
     if(using_mpi)
@@ -514,7 +511,6 @@ void darshan_core_shutdown(int write_log)
     unlink(final_core->mmap_log_name);
 #endif
 
-    fprintf(stderr, "\n\n 4 \n\n");
     final_core->comp_buf = malloc(darshan_mod_mem_quota);
     logfile_name = malloc(PATH_MAX);
     if(!final_core->comp_buf || !logfile_name)
@@ -530,7 +526,6 @@ void darshan_core_shutdown(int write_log)
 #ifdef HAVE_MPI
     if(using_mpi)
     {
-    fprintf(stderr, "\n\n 5 \n\n");
         /* allreduce locally active mods to determine globally active mods */
         PMPI_Allreduce(MPI_IN_PLACE, active_mods, DARSHAN_MAX_MODS, MPI_INT,
             MPI_SUM, final_core->mpi_comm);
@@ -566,43 +561,32 @@ void darshan_core_shutdown(int write_log)
      * bootstraps the shutdown procedure on MPI_Finalize, which forked processes
      * will not call
      */
-    fprintf(stderr, "\n\n 6 \n\n");
     if(orig_parent_pid)
     {
         /* set fork metadata */
-    fprintf(stderr, "\n\n 6.1 \n\n");
         meta_remain = DARSHAN_JOB_METADATA_LEN -
             strlen(final_core->log_job_p->metadata) - 1;
-    fprintf(stderr, "\n\n 6.2 \n\n");
         if(meta_remain >= 18) // 18 bytes enough for meta string + max PID (5 chars)
         {
-    fprintf(stderr, "\n\n 6.3 \n\n");
             m = final_core->log_job_p->metadata +
                 strlen(final_core->log_job_p->metadata);
-    fprintf(stderr, "\n\n 6.4 \n\n");
             sprintf(m, "fork_parent=%d\n", parent_pid);
         }
     }
 
     /* get the log file name */
-    fprintf(stderr, "\n\n 6.5 \n\n");
     darshan_get_logfile_name(logfile_name, final_core);
-    fprintf(stderr, "\n\n 6.6 \n\n");
     if(strlen(logfile_name) == 0)
     {
         /* failed to generate log file name */
         goto cleanup;
     }
 
-    fprintf(stderr, "\n\n 7 \n\n");
     if(internal_timing_flag)
         open1 = darshan_core_wtime_absolute();
     /* open the darshan log file */
-    fprintf(stderr, "\n\n 7.1 \n\n");
     ret = darshan_log_open(logfile_name, final_core, &log_fh);
-        fprintf(stderr, "\n\n 7.11 \n\n");
     if(internal_timing_flag) {
-        fprintf(stderr, "\n\n 7.2 \n\n");
         open2 = darshan_core_wtime_absolute();
     }
     /* error out if unable to open log file */
@@ -610,19 +594,15 @@ void darshan_core_shutdown(int write_log)
     log_created = 1;
 
     if(internal_timing_flag) {
-        fprintf(stderr, "\n\n 7.3 \n\n");
         job1 = darshan_core_wtime_absolute();
     }
     /* write the the compressed darshan job information */
-    fprintf(stderr, "\n\n 7.4 \n\n");
     ret = darshan_log_write_job_record(log_fh, final_core, &gz_fp);
-    fprintf(stderr, "\n\n 7.5 \n\n");
     if(internal_timing_flag)
         job2 = darshan_core_wtime_absolute();
     /* error out if unable to write job information */
     DARSHAN_CHECK_ERR(ret, "unable to write job record to file %s", logfile_name);
 
-    fprintf(stderr, "\n\n 8 \n\n");
     if(internal_timing_flag)
         rec1 = darshan_core_wtime_absolute();
     /* write the record name->id hash to the log file */
@@ -641,7 +621,6 @@ void darshan_core_shutdown(int write_log)
      *      - add module map info (file offset/length) to log header
      *      - shutdown the module
      */
-    fprintf(stderr, "\n\n 9 \n\n");
     for(i = 0; i < DARSHAN_MAX_MODS; i++)
     {
         struct darshan_core_module* this_mod = final_core->mod_array[i];
@@ -704,7 +683,6 @@ void darshan_core_shutdown(int write_log)
         final_core->log_hdr_p->mod_map[i].len =
             gz_fp - final_core->log_hdr_p->mod_map[i].off;
 
-    fprintf(stderr, "\n\n 10 \n\n");
         if(internal_timing_flag)
             mod2[i] = darshan_core_wtime_absolute();
 
@@ -786,7 +764,6 @@ void darshan_core_shutdown(int write_log)
         }
 #endif
 
-    fprintf(stderr, "\n\n 10 \n\n");
         darshan_core_fprintf(stderr, "#darshan:<op>\t<nprocs>\t<time>\n");
         darshan_core_fprintf(stderr, "darshan:log_open\t%d\t%f\n", nprocs, open_tm);
         darshan_core_fprintf(stderr, "darshan:job_write\t%d\t%f\n", nprocs, job_tm);
@@ -1630,12 +1607,9 @@ static int darshan_log_open(char *logfile_name, struct darshan_core_runtime *cor
         }
 
         /* open the darshan log file for writing using MPI */
-    fprintf(stderr, "\n\n7.112\n\n");
         ret = MPI_File_open(core->mpi_comm, logfile_name,
             MPI_MODE_CREATE | MPI_MODE_WRONLY | MPI_MODE_EXCL, info, &log_fh->mpi_fh);
-    fprintf(stderr, "\n\n7.113\n\n");
         MPI_Info_free(&info);
-    fprintf(stderr, "\n\n7.114\n\n");
         if(ret != MPI_SUCCESS)
             return(-1);
         return(0);
@@ -1643,7 +1617,6 @@ static int darshan_log_open(char *logfile_name, struct darshan_core_runtime *cor
 #endif
 
     /* open the darshan log file for writing */
-    fprintf(stderr, "\n\n7.115\n\n");
     log_fh->nompi_fd = open(logfile_name, O_CREAT | O_WRONLY | O_EXCL, S_IRUSR);
     if(log_fh->nompi_fd < 0)
         return(-1);
@@ -2457,13 +2430,11 @@ double darshan_core_wtime()
     DARSHAN_CORE_LOCK();
     if(!darshan_core)
     {
-        // fprintf(stderr, "\n\ndarshan core is NULL\n\n");
         DARSHAN_CORE_UNLOCK();
         return(0);
     }
     else
     {
-        // fprintf(stderr, "\n\ndarshan core is not NULL\n\n");
         wtime_offset = darshan_core->wtime_offset;
     }
     DARSHAN_CORE_UNLOCK();
