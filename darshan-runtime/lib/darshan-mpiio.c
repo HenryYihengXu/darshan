@@ -1261,6 +1261,7 @@ int DARSHAN_DECL(MPI_File_open)(MPI_Comm comm, const char *filename, int amode, 
 #else
 int DARSHAN_DECL(MPI_File_open)(MPI_Comm comm, char *filename, int amode, MPI_Info info, MPI_File *fh) 
 #endif
+{
     int ret;
     MPI_File tmp_fh;
     char* tmp;
