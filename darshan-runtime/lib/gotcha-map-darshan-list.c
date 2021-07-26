@@ -245,7 +245,7 @@ int setup_darshan_gotcha_wrappers(int priority)
     enum gotcha_error_t result;
     result = gotcha_set_priority("darshan", priority);
     if (result != GOTCHA_SUCCESS) {
-      printf("gotcha_darshan_set_priority returned %d\n", (int) result);
+      fprintf(stderr, "gotcha_darshan_set_priority returned %d\n", (int) result);
       return -1;
     }
     result = gotcha_wrap(darshan_wrappers, GOTCHA_NFUNCS, "darshan");
@@ -265,6 +265,7 @@ int setup_darshan_gotcha_wrappers(int priority)
                 }
             }
         } else {
+            fprintf(stderr, "gotcha_wrap() fatal %d\n", (int) result);
             return -1;
         }
     }
