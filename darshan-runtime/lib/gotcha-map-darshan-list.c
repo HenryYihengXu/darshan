@@ -188,7 +188,7 @@ struct gotcha_binding_t darshan_wrappers[] = {
 
 #ifdef BUILD_NULL_MODULE
     /* null */
-    { "foo", DARSHAN_DECL(foo), &DARSHAN_WRAPPEE_HANDLE(foo) },
+    // { "foo", DARSHAN_DECL(foo), &DARSHAN_WRAPPEE_HANDLE(foo) },
 #endif
 
 #ifdef BUILD_PNETCDF_MODULE
@@ -239,6 +239,13 @@ int setup_darshan_gotcha_wrappers(int priority)
     #else
     fprintf(stderr, "\n\nBUILD_MDHIM_MODULE is not defined \n\n");
     #endif
+
+    #ifdef BUILD_NULL_MODULE
+    fprintf(stderr, "\n\nBUILD_MDHIM_MODULE is defined \n\n");
+    #else
+    fprintf(stderr, "\n\nBUILD_MDHIM_MODULE is not defined \n\n");
+    #endif
+    
 
     /* insert our I/O wrappers using gotcha */
     fprintf(stderr, "darshan setup gotcha wrappers with priority = %d\n", priority);
