@@ -230,9 +230,6 @@ __attribute__((destructor)) void serial_finalize(void)
 #else /* WITH_INIT_FINI */
 
 #ifdef HAVE_MPI
-DARSHAN_FORWARD_DECL(MPI_Finalize, int, ());
-DARSHAN_FORWARD_DECL(MPI_Init, int, (int *argc, char ***argv));
-DARSHAN_FORWARD_DECL(MPI_Init_thread, int, (int *argc, char ***argv, int required, int *provided));
 
 int DARSHAN_DECL(MPI_Init)(int *argc, char ***argv)
 {
