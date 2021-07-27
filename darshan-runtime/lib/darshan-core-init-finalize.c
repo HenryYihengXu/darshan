@@ -234,7 +234,7 @@ DARSHAN_FORWARD_DECL(MPI_Finalize, int, ());
 DARSHAN_FORWARD_DECL(MPI_Init, int, (int *argc, char ***argv));
 DARSHAN_FORWARD_DECL(MPI_Init_thread, int, (int *argc, char ***argv, int required, int *provided));
 
-int MPI_Init(int *argc, char ***argv)
+int DARSHAN_DECL(MPI_Init)(int *argc, char ***argv)
 {
     int ret;
 
@@ -255,7 +255,7 @@ int MPI_Init(int *argc, char ***argv)
         /* we don't see argc and argv here in fortran */
         darshan_core_initialize(0, NULL);
     }
-    int priority = 3;
+
     return(ret);
 }
 
@@ -287,7 +287,7 @@ int DARSHAN_DECL(MPI_Init_thread)(int *argc, char ***argv, int required, int *pr
 #endif /* HAVE_MPI */
 
 #ifdef __GNUC__
-__attribute__((constructor)) void serial_init(void)
+__attribute__((constructor)) void ld_init(void)
 {
     setup_darshan_gotcha_wrappers(PRIORITY);
     
@@ -298,10 +298,8 @@ __attribute__((constructor)) void serial_init(void)
     return;
 }
 
-__attribute__((destructor)) void serial_finalize(void)
-{
-    setup_darshan_gotcha_wrappers(PRIORITY);
-    
+__attribute__((destructor)) void ld_finalize(void)
+{    
     char *no_mpi;
     no_mpi = getenv(DARSHAN_ENABLE_NONMPI);
     if (no_mpi)
