@@ -188,14 +188,14 @@ struct gotcha_binding_t darshan_wrappers[] = {
 
 #ifdef BUILD_NULL_MODULE
     /* null */
-    { "foo", DARSHAN_DECL(foo), &DARSHAN_WRAPPEE_HANDLE(foo) },
+    // { "foo", DARSHAN_DECL(foo), &DARSHAN_WRAPPEE_HANDLE(foo) },
 #endif
 
 #ifdef BUILD_PNETCDF_MODULE
     /* pnetcdf */
-    { "ncmpi_create", DARSHAN_DECL(ncmpi_create), &DARSHAN_WRAPPEE_HANDLE(ncmpi_create) },
-    { "ncmpi_open", DARSHAN_DECL(ncmpi_open), &DARSHAN_WRAPPEE_HANDLE(ncmpi_open) },
-    { "ncmpi_close", DARSHAN_DECL(ncmpi_close), &DARSHAN_WRAPPEE_HANDLE(ncmpi_close) },
+    // { "ncmpi_create", DARSHAN_DECL(ncmpi_create), &DARSHAN_WRAPPEE_HANDLE(ncmpi_create) },
+    // { "ncmpi_open", DARSHAN_DECL(ncmpi_open), &DARSHAN_WRAPPEE_HANDLE(ncmpi_open) },
+    // { "ncmpi_close", DARSHAN_DECL(ncmpi_close), &DARSHAN_WRAPPEE_HANDLE(ncmpi_close) },
 #endif
 
 };
