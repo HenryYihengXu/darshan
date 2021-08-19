@@ -248,7 +248,7 @@ int setup_darshan_gotcha_wrappers(int priority)
     
 
     /* insert our I/O wrappers using gotcha */
-    fprintf(stderr, "darshan setup gotcha wrappers with priority = %d\n", priority);
+    // fprintf(stderr, "darshan setup gotcha wrappers with priority = %d\n", priority);
     enum gotcha_error_t result;
     result = gotcha_set_priority("darshan", priority);
     if (result != GOTCHA_SUCCESS) {
